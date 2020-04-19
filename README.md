@@ -1,10 +1,6 @@
-[![Scholarship Google](https://img.shields.io/badge/scholarship-Google-brightgreen.svg)](https://in.udacity.com/google-india-scholarships)
-[![Udacity Nanodegree](https://img.shields.io/badge/Udacity-Nanodegree-blue.svg)](https://in.udacity.com/course/android-developer-nanodegree-by-google--nd801)
 [![License MIT](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/Jithin-Jude/Nanodegree_Hostel-Mate/blob/master/LICENSE) 
 
-![banner](https://user-images.githubusercontent.com/20029287/46324719-881b4680-c612-11e8-92b6-5bb5882b2abd.jpg)
-
-# Capstone Project Stage 2 :- Hostel Mate
+# HostelMate AJCE
 
 ![cover](https://user-images.githubusercontent.com/20029287/45880101-75a83e00-bdc4-11e8-8415-429d2af7067d.JPG)
 
@@ -17,7 +13,7 @@ from their room to reception. Sometimes the receptionist will not be there so th
 wait for a long. I want to replace this conventional hostel issue reporting system with the help of
 technology which helps to reduce the strain of the hostel staff and the inmates.
 
-How to use Hostel Mate?
+How to use HostelMate?
 -
 Each inmate in the hostel should register and login via google to use the facility. There should
 be only one login for receptionist. For which, user name and password are default stored in firebase Real Time Database. Once the receptionist has logged with this user name and
