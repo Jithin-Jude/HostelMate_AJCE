@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "819808533668",
+    "firebase_url": "https://hostelmate-ajce.firebaseio.com",
+    "project_id": "hostelmate-ajce",
+    "storage_bucket": "hostelmate-ajce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:819808533668:android:e3559ab1f57aa189967a31",
+        "android_client_info": {
+          "package_name": "com.ajce.hostelmate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "819808533668-pfbvuorpusv034g2g83hhjues8gqj7ia.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ajce.hostelmate",
+            "certificate_hash": "b26c1fa9bbfeda8aed201e8b92abef6fbb865433"
+          }
+        },
+        {
+          "client_id": "819808533668-1ctj94eg32n6jmdv5a1ppgsfgiggd42m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3xfkunryRKYP2s4Z-8TU1b3kBIHNJL8A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "819808533668-1ctj94eg32n6jmdv5a1ppgsfgiggd42m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
