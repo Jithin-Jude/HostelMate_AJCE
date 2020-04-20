@@ -56,16 +56,16 @@ class IssueStatusActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         val navigationView = findViewById<View?>(R.id.nav_view) as NavigationView
         navigationView.setNavigationItemSelectedListener(this)
         val header = navigationView.getHeaderView(0)
-        //val personNameTV = header.findViewById<TextView?>(R.id.person_name)
-        //val personEmailTV = header.findViewById<TextView?>(R.id.person_email)
-        //val profilePic = header.findViewById<ImageView?>(R.id.profile_pic)
+        val personNameTV = header.findViewById<TextView?>(R.id.person_name)
+        val personEmailTV = header.findViewById<TextView?>(R.id.person_email)
+        val profilePic = header.findViewById<ImageView?>(R.id.profile_pic)
         Glide.with(this)
                 .load(profilePicUri)
                 .apply(RequestOptions()
                         .circleCrop())
-                .into(profile_pic)
-        person_name.text = personName
-        person_email.text = personEmail
+                .into(profilePic!!)
+        personNameTV?.text = personName
+        personEmailTV?.text = personEmail
         databaseIssue = FirebaseDatabase.getInstance().getReference("issues")
         databaseIssue.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
