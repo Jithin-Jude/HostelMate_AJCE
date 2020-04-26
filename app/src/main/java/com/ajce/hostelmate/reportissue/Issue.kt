@@ -16,7 +16,7 @@ class Issue() : Parcelable {
     var issueReportedBy: String? = null
     var issueDate: String? = null
     var issueStatus: String? = null
-    var imageEncoded: String? = null
+    var issueImageUrl: String? = null
 
     constructor(parcel: Parcel) : this() {
         issueId = parcel.readString()
@@ -27,7 +27,7 @@ class Issue() : Parcelable {
         issueReportedBy = parcel.readString()
         issueDate = parcel.readString()
         issueStatus = parcel.readString()
-        imageEncoded = parcel.readString()
+        issueImageUrl = parcel.readString()
     }
 
     constructor(issueId: String?, issueTitle: String?, issueBlock: String?,
@@ -41,7 +41,7 @@ class Issue() : Parcelable {
         this.issueReportedBy = issueReportedBy
         this.issueDate = issueDate
         this.issueStatus = issueStatus
-        this.imageEncoded = imageEncoded
+        this.issueImageUrl = imageEncoded
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -53,7 +53,7 @@ class Issue() : Parcelable {
         parcel.writeString(issueReportedBy)
         parcel.writeString(issueDate)
         parcel.writeString(issueStatus)
-        parcel.writeString(imageEncoded)
+        parcel.writeString(issueImageUrl)
     }
 
     override fun describeContents(): Int {

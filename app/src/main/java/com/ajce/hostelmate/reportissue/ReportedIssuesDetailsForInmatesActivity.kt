@@ -23,7 +23,7 @@ class ReportedIssuesDetailsForInmatesActivity : AppCompatActivity() {
         tv_status_inmates.text = IssueStatusActivity.issueList?.get(position)?.issueStatus
 
         Glide.with(this)
-                .load(IssueStatusActivity.issueList?.get(position)?.imageEncoded)
+                .load(IssueStatusActivity.issueList?.get(position)?.issueImageUrl)
                 .into(img_issue_inmates)
     }
 

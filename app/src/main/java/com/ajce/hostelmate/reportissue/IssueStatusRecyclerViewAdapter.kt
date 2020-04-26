@@ -37,7 +37,7 @@ class IssueStatusRecyclerViewAdapter(var context: Context?, issueList: MutableLi
         }
 
         Glide.with(context!!)
-                .load(issueList?.get(pos)?.imageEncoded)
+                .load(issueList?.get(pos)?.issueImageUrl)
                 .into(holderIssueStatus.imageView!!)
 
         holderIssueStatus.setItemClickListener(object : IssueStatusRecyclerViewClickListener {

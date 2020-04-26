@@ -38,7 +38,7 @@ class ReceptionIssueRecyclerViewAdapter internal constructor(var context: Contex
         }
 
         Glide.with(context!!)
-                .load(issueList?.get(pos)?.imageEncoded)
+                .load(issueList?.get(pos)?.issueImageUrl)
                 .into(holder.imageView)
 
         holder.setItemClickListener(object : IssueStatusRecyclerViewClickListener {

@@ -26,7 +26,7 @@ class ReportedIssuesDetailsForReceptionActivity : AppCompatActivity() {
         tv_reported_by.text = ReportedIssuesActivity.issueList?.get(position)?.issueReportedBy
 
         Glide.with(this)
-                .load(IssueStatusActivity.issueList?.get(position)?.imageEncoded)
+                .load(IssueStatusActivity.issueList?.get(position)?.issueImageUrl)
                 .into(img_issue)
 
         if (ReportedIssuesActivity.Companion.issueList?.get(position)?.issueStatus == "Fixed") {
@@ -51,7 +51,7 @@ class ReportedIssuesDetailsForReceptionActivity : AppCompatActivity() {
         val description: String? = ReportedIssuesActivity.issueList?.get(position)?.issueDescription
         val reportedBy: String? = ReportedIssuesActivity.issueList?.get(position)?.issueReportedBy
         val date: String? = ReportedIssuesActivity.issueList?.get(position)?.issueDate
-        val imageEncoded: String? = ReportedIssuesActivity.issueList?.get(position)?.imageEncoded
+        val imageEncoded: String? = ReportedIssuesActivity.issueList?.get(position)?.issueImageUrl
         val issue = Issue(id, title, block, room, description, reportedBy, date, status, imageEncoded)
         databaseReference?.setValue(issue)
         mark_as_fixed.visibility = View.INVISIBLE
