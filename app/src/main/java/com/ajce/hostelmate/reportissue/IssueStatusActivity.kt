@@ -98,34 +98,6 @@ class IssueStatusActivity : AppCompatActivity(), NavigationView.OnNavigationItem
             recyclerView.adapter = adapterIssueStatus
             loading_issues_for_inmates.visibility = View.GONE
         })
-
-/*        databaseIssue = FirebaseDatabase.getInstance().getReference("issues")
-
-        val listener: ValueEventListener = object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                issueList?.clear()
-                for (issueSnapshot in dataSnapshot.children) {
-                    val issue = issueSnapshot.getValue(Issue::class.java)
-                    if (issue != null) {
-                        if (issue.issueReportedBy == personEmail) {
-                            issueList?.add(issue)
-                        }
-                    }
-                }
-                if (issueList?.size != 0) updateWidget(issueList?.get(issueList!!.size - 1)?.issueStatus)
-                val recyclerView = findViewById<View?>(R.id.rv_issue_status) as RecyclerView
-                recyclerView.layoutManager = LinearLayoutManager(applicationContext)
-                adapterIssueStatus = IssueStatusRecyclerViewAdapter(applicationContext, issueList)
-                recyclerView.adapter = adapterIssueStatus
-                loading_issues_for_inmates.visibility = View.GONE
-            }
-
-            override fun onCancelled(databaseError: DatabaseError) {
-                Log.d("ERROR","ERROR: " + databaseError)
-            }
-        }
-
-        databaseIssue.addValueEventListener(listener)*/
     }
 
     override fun onBackPressed() {
