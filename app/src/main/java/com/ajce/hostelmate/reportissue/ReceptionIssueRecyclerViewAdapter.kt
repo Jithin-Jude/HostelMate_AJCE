@@ -8,7 +8,6 @@ import android.util.Base64
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.ajce.hostelmate.R
-import com.ajce.hostelmate.RecyclerViewClickListener
 
 /**
  * Created by JithinJude on 15-03-2018.
@@ -16,7 +15,7 @@ import com.ajce.hostelmate.RecyclerViewClickListener
 class ReceptionIssueRecyclerViewAdapter internal constructor(var context: Context?, issueList: MutableList<Issue?>?) : RecyclerView.Adapter<ReceptionIssueRecyclerViewHolder?>() {
     private val issueList: MutableList<Issue?>?
     private val mInflater: LayoutInflater?
-    private val mClickListener: RecyclerViewClickListener? = null
+    private val mClickListenerIssueStatus: IssueStatusRecyclerViewClickListener? = null
 
     // inflates the row layout from xml when needed
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): ReceptionIssueRecyclerViewHolder {
@@ -42,7 +41,7 @@ class ReceptionIssueRecyclerViewAdapter internal constructor(var context: Contex
         } catch (e: Exception) {
             e.printStackTrace()
         }
-        holder.setItemClickListener(object : RecyclerViewClickListener {
+        holder.setItemClickListener(object : IssueStatusRecyclerViewClickListener {
             override fun onItemClick(pos: Int) {
 
             }

@@ -7,7 +7,6 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import com.ajce.hostelmate.R
-import com.ajce.hostelmate.RecyclerViewClickListener
 
 class ReceptionIssueRecyclerViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!), View.OnClickListener {
     var title: TextView
@@ -15,17 +14,17 @@ class ReceptionIssueRecyclerViewHolder(itemView: View?) : RecyclerView.ViewHolde
     var blockAndRoom: TextView
     var issueStatus: TextView
     var imageView: ImageView
-    private lateinit var itemClickListener: RecyclerViewClickListener
+    private lateinit var itemClickListenerIssueStatus: IssueStatusRecyclerViewClickListener
     var context: Context?
     override fun onClick(view: View?) {
-        itemClickListener.onItemClick(this.layoutPosition)
+        itemClickListenerIssueStatus.onItemClick(this.layoutPosition)
         val intent = Intent(context, ReportedIssuesDetailsForReceptionActivity::class.java)
         intent.putExtra("POSITION_ID", adapterPosition)
         context?.startActivity(intent)
     }
 
-    fun setItemClickListener(itemClickListener: RecyclerViewClickListener) {
-        this.itemClickListener = itemClickListener
+    fun setItemClickListener(itemClickListenerIssueStatus: IssueStatusRecyclerViewClickListener) {
+        this.itemClickListenerIssueStatus = itemClickListenerIssueStatus
     }
 
     init {

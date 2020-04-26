@@ -17,7 +17,6 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import com.ajce.hostelmate.R
-import com.ajce.hostelmate.RecyclerViewAdapter
 import com.ajce.hostelmate.WidgetForInmates
 import com.ajce.hostelmate.login.InmatesLoginActivity
 import com.bumptech.glide.Glide
@@ -30,7 +29,7 @@ import kotlinx.android.synthetic.main.content_issue_status.*
 import java.util.*
 
 class IssueStatusActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-    lateinit var adapter: RecyclerViewAdapter
+    lateinit var adapterIssueStatus: IssueStatusRecyclerViewAdapter
     lateinit var databaseIssue: DatabaseReference
     //lateinit var progressBarLodingIssuesForInmates: ProgressBar
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -86,8 +85,8 @@ class IssueStatusActivity : AppCompatActivity(), NavigationView.OnNavigationItem
                 if (issueList?.size != 0) updateWidget(issueList?.get(issueList!!.size - 1)?.issueStatus)
                 val recyclerView = findViewById<View?>(R.id.rv_issue_status) as RecyclerView
                 recyclerView.layoutManager = LinearLayoutManager(applicationContext)
-                adapter = RecyclerViewAdapter(applicationContext, issueList)
-                recyclerView.adapter = adapter
+                adapterIssueStatus = IssueStatusRecyclerViewAdapter(applicationContext, issueList)
+                recyclerView.adapter = adapterIssueStatus
                 loading_issues_for_inmates.visibility = View.GONE
             }
 

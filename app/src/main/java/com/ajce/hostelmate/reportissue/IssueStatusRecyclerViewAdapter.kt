@@ -1,4 +1,4 @@
-package com.ajce.hostelmate
+package com.ajce.hostelmate.reportissue
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -7,40 +7,40 @@ import android.support.v7.widget.RecyclerView
 import android.util.Base64
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.ajce.hostelmate.reportissue.Issue
+import com.ajce.hostelmate.R
 
 /**
  * Created by JithinJude on 15-03-2018.
  */
-class RecyclerViewAdapter(var context: Context?, issueList: MutableList<Issue?>?) : RecyclerView.Adapter<RecyclerViewHolder?>() {
+class IssueStatusRecyclerViewAdapter(var context: Context?, issueList: MutableList<Issue?>?) : RecyclerView.Adapter<IssueStatusRecyclerViewHolder?>() {
     private val issueList: MutableList<Issue?>?
     private val mInflater: LayoutInflater?
 
     // inflates the row layout from xml when needed
-    override fun onCreateViewHolder(parent: ViewGroup, pos: Int): RecyclerViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, pos: Int): IssueStatusRecyclerViewHolder {
         val view = mInflater?.inflate(R.layout.recyclerview_row, parent, false)
-        return RecyclerViewHolder(view)
+        return IssueStatusRecyclerViewHolder(view)
     }
 
     // binds the data to the TextView in each row
-    override fun onBindViewHolder(holder: RecyclerViewHolder, pos: Int) {
-        holder.title?.text = issueList?.get(pos)?.issueTitle
+    override fun onBindViewHolder(holderIssueStatus: IssueStatusRecyclerViewHolder, pos: Int) {
+        holderIssueStatus.title?.text = issueList?.get(pos)?.issueTitle
         val issueLocation = issueList?.get(pos)?.issueBlock + ", " + issueList?.get(pos)?.issueRoom
-        holder.blockAndRoom?.text = issueLocation
-        holder.date?.text = issueList?.get(pos)?.issueDate
-        holder.issueStatus?.text = issueList?.get(pos)?.issueStatus
+        holderIssueStatus.blockAndRoom?.text = issueLocation
+        holderIssueStatus.date?.text = issueList?.get(pos)?.issueDate
+        holderIssueStatus.issueStatus?.text = issueList?.get(pos)?.issueStatus
         if (issueList?.get(pos)?.issueStatus == "Fixed") {
-            holder.issueStatus?.setTextColor(context?.getResources()?.getColor(R.color.green)!!)
+            holderIssueStatus.issueStatus?.setTextColor(context?.getResources()?.getColor(R.color.green)!!)
         } else {
-            holder.issueStatus?.setTextColor(context?.getResources()?.getColor(R.color.red)!!)
+            holderIssueStatus.issueStatus?.setTextColor(context?.getResources()?.getColor(R.color.red)!!)
         }
         try {
             val imageBitmap = decodeFromFirebaseBase64(issueList?.get(pos)?.imageEncoded)
-            holder.imageView?.setImageBitmap(imageBitmap)
+            holderIssueStatus.imageView?.setImageBitmap(imageBitmap)
         } catch (e: Exception) {
             e.printStackTrace()
         }
-        holder.setItemClickListener(object : RecyclerViewClickListener {
+        holderIssueStatus.setItemClickListener(object : IssueStatusRecyclerViewClickListener {
             override fun onItemClick(pos: Int) {
 
             }

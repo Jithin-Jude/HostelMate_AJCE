@@ -1,4 +1,4 @@
-package com.ajce.hostelmate
+package com.ajce.hostelmate.reportissue
 
 import android.content.Context
 import android.content.Intent
@@ -6,26 +6,26 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import com.ajce.hostelmate.reportissue.ReportedIssuesDetailsForInmatesActivity
+import com.ajce.hostelmate.R
 
-class RecyclerViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!), View.OnClickListener {
+class IssueStatusRecyclerViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!), View.OnClickListener {
     var title: TextView?
     var date: TextView?
     var blockAndRoom: TextView?
     var issueStatus: TextView?
     var imageView: ImageView?
-    private var itemClickListener: RecyclerViewClickListener? = null
+    private var itemClickListenerIssueStatus: IssueStatusRecyclerViewClickListener? = null
     var context: Context?
 
     override fun onClick(view: View?) {
-        itemClickListener?.onItemClick(this.layoutPosition)
+        itemClickListenerIssueStatus?.onItemClick(this.layoutPosition)
         val intent = Intent(context, ReportedIssuesDetailsForInmatesActivity::class.java)
         intent.putExtra("POSITION_ID", adapterPosition)
         context?.startActivity(intent)
     }
 
-    fun setItemClickListener(itemClickListener: RecyclerViewClickListener?) {
-        this.itemClickListener = itemClickListener
+    fun setItemClickListener(itemClickListenerIssueStatus: IssueStatusRecyclerViewClickListener?) {
+        this.itemClickListenerIssueStatus = itemClickListenerIssueStatus
     }
 
     init {
