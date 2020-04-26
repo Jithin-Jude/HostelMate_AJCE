@@ -51,13 +51,10 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    // ViewModel
-    implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
+    //ViewModel & LiveData
+    implementation "android.arch.lifecycle:extensions:$lifecycle_version"
     // Annotation processor
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
-
-    // LiveData
-    implementation "android.arch.lifecycle:extensions:$lifecycle_version"
 }
 
 apply plugin: 'com.google.gms.google-services'
