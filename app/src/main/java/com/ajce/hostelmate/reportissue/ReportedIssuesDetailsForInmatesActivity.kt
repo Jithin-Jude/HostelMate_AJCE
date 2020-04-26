@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.util.Base64
 import com.ajce.hostelmate.R
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_reported_issues_details_for_inmates.*
 
 class ReportedIssuesDetailsForInmatesActivity : AppCompatActivity() {
@@ -20,12 +21,10 @@ class ReportedIssuesDetailsForInmatesActivity : AppCompatActivity() {
         tv_room.text = IssueStatusActivity.issueList?.get(position)?.issueRoom
         tv_description.text = IssueStatusActivity.issueList?.get(position)?.issueDescription
         tv_status_inmates.text = IssueStatusActivity.issueList?.get(position)?.issueStatus
-        try {
-            val imageBitmap = decodeFromFirebaseBase64(IssueStatusActivity.issueList?.get(position)?.imageEncoded)
-            img_issue_inmates.setImageBitmap(imageBitmap)
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
+
+        Glide.with(this)
+                .load(IssueStatusActivity.issueList?.get(position)?.imageEncoded)
+                .into(img_issue_inmates)
     }
 
     companion object {

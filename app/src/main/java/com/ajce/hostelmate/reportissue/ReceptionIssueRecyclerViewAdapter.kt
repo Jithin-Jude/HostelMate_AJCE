@@ -8,6 +8,7 @@ import android.util.Base64
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.ajce.hostelmate.R
+import com.bumptech.glide.Glide
 
 /**
  * Created by JithinJude on 15-03-2018.
@@ -25,22 +26,21 @@ class ReceptionIssueRecyclerViewAdapter internal constructor(var context: Contex
 
     // binds the data to the TextView in each row
     override fun onBindViewHolder(holder: ReceptionIssueRecyclerViewHolder, pos: Int) {
-        holder.title?.text = issueList?.get(pos)?.issueTitle
+        holder.title.text = issueList?.get(pos)?.issueTitle
         val issueLocation = issueList?.get(pos)?.issueBlock + ", " + issueList?.get(pos)?.issueRoom
-        holder.blockAndRoom?.text = issueLocation
-        holder.date?.text = issueList?.get(pos)?.issueDate
-        holder.issueStatus?.text = issueList?.get(pos)?.issueStatus
+        holder.blockAndRoom.text = issueLocation
+        holder.date.text = issueList?.get(pos)?.issueDate
+        holder.issueStatus.text = issueList?.get(pos)?.issueStatus
         if (issueList?.get(pos)?.issueStatus == "Fixed") {
-            context?.resources?.getColor(R.color.green)?.let { holder.issueStatus?.setTextColor(it) }
+            context?.resources?.getColor(R.color.green)?.let { holder.issueStatus.setTextColor(it) }
         } else {
-            context?.getResources()?.getColor(R.color.red)?.let { holder.issueStatus?.setTextColor(it) }
+            context?.resources?.getColor(R.color.red)?.let { holder.issueStatus.setTextColor(it) }
         }
-        try {
-            val imageBitmap = decodeFromFirebaseBase64(ReportedIssuesActivity.Companion.issueList?.get(pos)?.imageEncoded)
-            holder.imageView?.setImageBitmap(imageBitmap)
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
+
+        Glide.with(context!!)
+                .load(issueList?.get(pos)?.imageEncoded)
+                .into(holder.imageView)
+
         holder.setItemClickListener(object : IssueStatusRecyclerViewClickListener {
             override fun onItemClick(pos: Int) {
 

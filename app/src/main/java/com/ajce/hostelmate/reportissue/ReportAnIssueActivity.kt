@@ -6,17 +6,25 @@ import android.appwidget.AppWidgetManager
 import android.content.ComponentName
 import android.content.Intent
 import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import androidx.appcompat.app.AppCompatActivity
-import android.util.Base64
+import android.util.Log
 import android.view.View
-import android.widget.*
+import android.widget.ArrayAdapter
+import android.widget.RemoteViews
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.ajce.hostelmate.R
 import com.ajce.hostelmate.WidgetForInmates
 import com.ajce.hostelmate.login.InmatesLoginActivity
+import com.google.android.gms.tasks.Continuation
+import com.google.android.gms.tasks.Task
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.UploadTask
 import kotlinx.android.synthetic.main.activity_report_an_issue.*
 import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
@@ -25,10 +33,12 @@ import java.util.*
 class ReportAnIssueActivity : AppCompatActivity() {
 
     var databaseIssue: DatabaseReference? = null
-    var personEmail: String? = null
+    var firebaseStore: FirebaseStorage? = null
+    var storageReference: StorageReference? = null
 
+    var personEmail: String? = null
     var photo: Bitmap? = null
-    var imageEncoded: String? = null
+    var imageUrl: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +50,7 @@ class ReportAnIssueActivity : AppCompatActivity() {
                 R.array.block_list, android.R.layout.simple_spinner_item)
         adapterSpinnerBlock.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         sp_block.adapter = adapterSpinnerBlock
+
         val adapterSpinnerRoom = ArrayAdapter.createFromResource(this,
                 R.array.room_list, android.R.layout.simple_spinner_item)
         adapterSpinnerRoom.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -47,7 +58,7 @@ class ReportAnIssueActivity : AppCompatActivity() {
     }
 
     fun addIssue(view: View?) {
-        if (imageEncoded == null) {
+        if (imageUrl == null) {
             Toast.makeText(this, "Take photo of Issue", Toast.LENGTH_LONG).show()
             return
         }
@@ -59,7 +70,7 @@ class ReportAnIssueActivity : AppCompatActivity() {
         val id = databaseIssue?.push()?.key
         val date = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date())
         val status = "Not Fixed"
-        val issue = Issue(id, title, block, room, description, reportedBy, date, status, imageEncoded)
+        val issue = Issue(id, title, block, room, description, reportedBy, date, status, imageUrl)
         databaseIssue?.child(id!!)?.setValue(issue)
         Toast.makeText(this, "Issue added", Toast.LENGTH_LONG).show()
         updateWidget(title)
@@ -71,14 +82,54 @@ class ReportAnIssueActivity : AppCompatActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
             photo = data?.extras?.get("data") as Bitmap
             camera_img?.setImageBitmap(photo)
             val baos = ByteArrayOutputStream()
             photo!!.compress(Bitmap.CompressFormat.PNG, 100, baos)
-            imageEncoded = Base64.encodeToString(baos.toByteArray(), Base64.DEFAULT)
+            val imgData = baos.toByteArray()
+
+            uploadImage("", imgData)
+
+            //imageEncoded = Base64.encodeToString(baos.toByteArray(), Base64.DEFAULT)
         }
     }
+
+    fun uploadImage(timeStamp: String, imgData: ByteArray){
+        firebaseStore = FirebaseStorage.getInstance()
+        storageReference = FirebaseStorage.getInstance().reference
+
+        var downloadUri = ""
+
+        if(imgData.isNotEmpty()){
+            val ref = storageReference?.child("issueImages/" + timeStamp +"_issue")
+            val uploadTask = ref?.putBytes(imgData)
+
+            val urlTask = uploadTask?.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
+                if (!task.isSuccessful) {
+                    task.exception?.let {
+                        throw it
+                    }
+                }
+                return@Continuation ref.downloadUrl
+            })?.addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    downloadUri = task.result.toString()
+                    imageUrl = downloadUri
+                    Log.d("ISSUE_IMAGE_URL","ISSUE_IMAGE_UR:" + imageUrl)
+                    //loadDatabase(downloadUri, timeStamp)
+                } else {
+                    //showSnackBar("Upload failed")
+                }
+            }?.addOnFailureListener{
+
+            }
+        }else{
+            //showSnackBar("Please select an Image")
+        }
+    }
+
 
     fun updateWidget(widgetText: String?) {
         val appWidgetManager = AppWidgetManager.getInstance(this)

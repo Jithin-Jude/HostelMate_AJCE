@@ -8,6 +8,7 @@ import android.util.Base64
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.ajce.hostelmate.R
+import com.bumptech.glide.Glide
 
 /**
  * Created by JithinJude on 15-03-2018.
@@ -34,12 +35,11 @@ class IssueStatusRecyclerViewAdapter(var context: Context?, issueList: MutableLi
         } else {
             holderIssueStatus.issueStatus?.setTextColor(context?.getResources()?.getColor(R.color.red)!!)
         }
-        try {
-            val imageBitmap = decodeFromFirebaseBase64(issueList?.get(pos)?.imageEncoded)
-            holderIssueStatus.imageView?.setImageBitmap(imageBitmap)
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
+
+        Glide.with(context!!)
+                .load(issueList?.get(pos)?.imageEncoded)
+                .into(holderIssueStatus.imageView!!)
+
         holderIssueStatus.setItemClickListener(object : IssueStatusRecyclerViewClickListener {
             override fun onItemClick(pos: Int) {
 

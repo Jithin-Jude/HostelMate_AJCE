@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.util.Base64
 import android.view.View
 import com.ajce.hostelmate.R
+import com.bumptech.glide.Glide
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_reported_issues_details_for_reception.*
 
@@ -23,18 +24,17 @@ class ReportedIssuesDetailsForReceptionActivity : AppCompatActivity() {
         tv_room.text = ReportedIssuesActivity.issueList?.get(position)?.issueRoom
         tv_description.text = ReportedIssuesActivity.issueList?.get(position)?.issueDescription
         tv_reported_by.text = ReportedIssuesActivity.issueList?.get(position)?.issueReportedBy
-        try {
-            val imageBitmap = decodeFromFirebaseBase64(ReportedIssuesActivity.Companion.issueList?.get(position)?.imageEncoded)
-            img_issue.setImageBitmap(imageBitmap)
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
+
+        Glide.with(this)
+                .load(IssueStatusActivity.issueList?.get(position)?.imageEncoded)
+                .into(img_issue)
+
         if (ReportedIssuesActivity.Companion.issueList?.get(position)?.issueStatus == "Fixed") {
-            mark_as_fixed.setVisibility(View.INVISIBLE)
-            tick_mark.setVisibility(View.VISIBLE)
+            mark_as_fixed.visibility = View.INVISIBLE
+            tick_mark.visibility = View.VISIBLE
         } else {
-            mark_as_fixed.setVisibility(View.VISIBLE)
-            tick_mark.setVisibility(View.INVISIBLE)
+            mark_as_fixed.visibility = View.VISIBLE
+            tick_mark.visibility = View.INVISIBLE
         }
     }
 
