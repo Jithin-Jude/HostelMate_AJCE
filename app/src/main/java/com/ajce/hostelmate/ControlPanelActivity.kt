@@ -31,8 +31,8 @@ class ControlPanelActivity : AppCompatActivity() {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
         editor = sharedPreferences.edit()
 
-        notification_switch.isChecked = sharedPreferences.getBoolean(NOTIFICATIONS_ON, false)
-        notification_switch.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked -> // do something, the isChecked will be
+        notificationSwitch.isChecked = sharedPreferences.getBoolean(NOTIFICATIONS_ON, false)
+        notificationSwitch.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked -> // do something, the isChecked will be
             // true if the switch is in the On position
             if (isChecked) {
                 turnOnNotifications()

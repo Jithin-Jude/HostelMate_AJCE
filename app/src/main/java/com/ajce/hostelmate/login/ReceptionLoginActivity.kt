@@ -44,8 +44,8 @@ class ReceptionLoginActivity : AppCompatActivity() {
     }
 
     fun receptionLogin(view: View?) {
-        val givenUserName = ed_user_name?.text.toString()
-        val givenPassword = ed_password?.text.toString()
+        val givenUserName = etUserName?.text.toString()
+        val givenPassword = etPassword?.text.toString()
 
         /*
         String id = databaseIssue.push().getKey();

@@ -17,14 +17,14 @@ class ReportedIssuesDetailsForInmatesActivity : AppCompatActivity() {
         val position = intent.getIntExtra("POSITION_ID", 0)
 
         title = IssueStatusActivity.issueList?.get(position)?.issueTitle
-        tv_block.text = IssueStatusActivity.issueList?.get(position)?.issueBlock
-        tv_room.text = IssueStatusActivity.issueList?.get(position)?.issueRoom
-        tv_description.text = IssueStatusActivity.issueList?.get(position)?.issueDescription
-        tv_status_inmates.text = IssueStatusActivity.issueList?.get(position)?.issueStatus
+        tvBlock.text = IssueStatusActivity.issueList?.get(position)?.issueBlock
+        tvRoom.text = IssueStatusActivity.issueList?.get(position)?.issueRoom
+        tvDescription.text = IssueStatusActivity.issueList?.get(position)?.issueDescription
+        tvStatusInmates.text = IssueStatusActivity.issueList?.get(position)?.issueStatus
 
         Glide.with(this)
                 .load(IssueStatusActivity.issueList?.get(position)?.issueImageUrl)
-                .into(img_issue_inmates)
+                .into(ivImgIssueInmates)
     }
 
     companion object {

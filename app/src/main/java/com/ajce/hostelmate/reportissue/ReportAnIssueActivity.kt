@@ -49,12 +49,12 @@ class ReportAnIssueActivity : AppCompatActivity() {
         val adapterSpinnerBlock = ArrayAdapter.createFromResource(this,
                 R.array.block_list, android.R.layout.simple_spinner_item)
         adapterSpinnerBlock.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        sp_block.adapter = adapterSpinnerBlock
+        spBlock.adapter = adapterSpinnerBlock
 
         val adapterSpinnerRoom = ArrayAdapter.createFromResource(this,
                 R.array.room_list, android.R.layout.simple_spinner_item)
         adapterSpinnerRoom.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        sp_room.adapter = adapterSpinnerRoom
+        spRoom.adapter = adapterSpinnerRoom
     }
 
     fun addIssue(view: View?) {
@@ -62,10 +62,10 @@ class ReportAnIssueActivity : AppCompatActivity() {
             Toast.makeText(this, "Take photo of Issue", Toast.LENGTH_LONG).show()
             return
         }
-        val title = ed_title?.text.toString()
-        val block = sp_block.selectedItem.toString()
-        val room = sp_room.selectedItem.toString()
-        val description = ed_description?.text.toString()
+        val title = etTitle?.text.toString()
+        val block = spBlock.selectedItem.toString()
+        val room = spRoom.selectedItem.toString()
+        val description = etDescription?.text.toString()
         val reportedBy = personEmail
         val id = databaseIssue?.push()?.key
         val date = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date())
@@ -85,7 +85,7 @@ class ReportAnIssueActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
             photo = data?.extras?.get("data") as Bitmap
-            camera_img?.setImageBitmap(photo)
+            ivCameraImg?.setImageBitmap(photo)
             val baos = ByteArrayOutputStream()
             photo!!.compress(Bitmap.CompressFormat.PNG, 100, baos)
             val imgData = baos.toByteArray()
@@ -139,10 +139,10 @@ class ReportAnIssueActivity : AppCompatActivity() {
         val remoteViews = RemoteViews(this.packageName, R.layout.widget_for_inmates)
         val intent = Intent(this, InmatesLoginActivity::class.java)
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
-        remoteViews.setOnClickPendingIntent(R.id.img_widget, pendingIntent)
+        remoteViews.setOnClickPendingIntent(R.id.ivIssueImgWidget, pendingIntent)
         val thisWidget = ComponentName(this, WidgetForInmates::class.java)
-        remoteViews.setTextViewText(R.id.appwidget_text, widgetText)
-        remoteViews.setImageViewResource(R.id.img_widget, R.drawable.hostel_red)
+        remoteViews.setTextViewText(R.id.tvWidgetText, widgetText)
+        remoteViews.setImageViewResource(R.id.ivIssueImgWidget, R.drawable.hostel_red)
         appWidgetManager.updateAppWidget(thisWidget, remoteViews)
     }
 

@@ -4,14 +4,12 @@ import android.appwidget.AppWidgetManager
 import android.content.ComponentName
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import android.widget.RemoteViews
 import android.widget.TextView
 import android.widget.Toast
-import androidx.annotation.Nullable
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -45,7 +43,7 @@ class IssueStatusActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         val toolbar = findViewById<View?>(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
 
-        loading_issues_for_inmates.setVisibility(View.VISIBLE)
+        loadingIssuesForInmates.setVisibility(View.VISIBLE)
 
         val personName = intent.extras["PERSON_NAME"].toString()
         val personEmail = intent.extras["PERSON_EMAIL"].toString()
@@ -63,12 +61,12 @@ class IssueStatusActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
 
-        val navigationView = findViewById<View?>(R.id.nav_view) as NavigationView
+        val navigationView = findViewById<View?>(R.id.navView) as NavigationView
         navigationView.setNavigationItemSelectedListener(this)
         val header = navigationView.getHeaderView(0)
-        val personNameTV = header.findViewById<TextView?>(R.id.person_name)
-        val personEmailTV = header.findViewById<TextView?>(R.id.person_email)
-        val profilePic = header.findViewById<ImageView?>(R.id.profile_pic)
+        val personNameTV = header.findViewById<TextView?>(R.id.tvPersonName)
+        val personEmailTV = header.findViewById<TextView?>(R.id.tvPersonEmail)
+        val profilePic = header.findViewById<ImageView?>(R.id.ivProfilePic)
         Glide.with(this)
                 .load(profilePicUri)
                 .apply(RequestOptions()
@@ -92,11 +90,11 @@ class IssueStatusActivity : AppCompatActivity(), NavigationView.OnNavigationItem
                 }
             }
             if (issueList?.size != 0) updateWidget(issueList?.get(issueList!!.size - 1)?.issueStatus)
-            val recyclerView = findViewById<View?>(R.id.rv_issue_status) as RecyclerView
+            val recyclerView = findViewById<View?>(R.id.rvIssueStatus) as RecyclerView
             recyclerView.layoutManager = LinearLayoutManager(applicationContext)
             adapterIssueStatus = IssueStatusRecyclerViewAdapter(applicationContext, issueList)
             recyclerView.adapter = adapterIssueStatus
-            loading_issues_for_inmates.visibility = View.GONE
+            loadingIssuesForInmates.visibility = View.GONE
         })
     }
 
@@ -137,11 +135,11 @@ class IssueStatusActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         val remoteViews = RemoteViews(this.packageName, R.layout.widget_for_inmates)
         val thisWidget = ComponentName(this, WidgetForInmates::class.java)
         val widgetText = issueList?.get(issueList!!.size - 1)?.issueTitle
-        remoteViews.setTextViewText(R.id.appwidget_text, widgetText)
+        remoteViews.setTextViewText(R.id.tvWidgetText, widgetText)
         if (isFixed == "Fixed") {
-            remoteViews.setImageViewResource(R.id.img_widget, R.drawable.hostel_green)
+            remoteViews.setImageViewResource(R.id.ivIssueImgWidget, R.drawable.hostel_green)
         } else {
-            remoteViews.setImageViewResource(R.id.img_widget, R.drawable.hostel_red)
+            remoteViews.setImageViewResource(R.id.ivIssueImgWidget, R.drawable.hostel_red)
         }
         appWidgetManager.updateAppWidget(thisWidget, remoteViews)
     }

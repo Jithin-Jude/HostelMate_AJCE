@@ -20,21 +20,21 @@ class ReportedIssuesDetailsForReceptionActivity : AppCompatActivity() {
         position = intent.getIntExtra("POSITION_ID", 0)
 
         title = ReportedIssuesActivity.issueList?.get(position)?.issueTitle
-        tv_block.text = ReportedIssuesActivity.issueList?.get(position)?.issueBlock
-        tv_room.text = ReportedIssuesActivity.issueList?.get(position)?.issueRoom
-        tv_description.text = ReportedIssuesActivity.issueList?.get(position)?.issueDescription
-        tv_reported_by.text = ReportedIssuesActivity.issueList?.get(position)?.issueReportedBy
+        tvBlock.text = ReportedIssuesActivity.issueList?.get(position)?.issueBlock
+        tvRoom.text = ReportedIssuesActivity.issueList?.get(position)?.issueRoom
+        tvDescription.text = ReportedIssuesActivity.issueList?.get(position)?.issueDescription
+        tvReportedBy.text = ReportedIssuesActivity.issueList?.get(position)?.issueReportedBy
 
         Glide.with(this)
                 .load(IssueStatusActivity.issueList?.get(position)?.issueImageUrl)
-                .into(img_issue)
+                .into(ivImgIssue)
 
         if (ReportedIssuesActivity.Companion.issueList?.get(position)?.issueStatus == "Fixed") {
-            mark_as_fixed.visibility = View.INVISIBLE
-            tick_mark.visibility = View.VISIBLE
+            markAsFixed.visibility = View.INVISIBLE
+            tickMark.visibility = View.VISIBLE
         } else {
-            mark_as_fixed.visibility = View.VISIBLE
-            tick_mark.visibility = View.INVISIBLE
+            markAsFixed.visibility = View.VISIBLE
+            tickMark.visibility = View.INVISIBLE
         }
     }
 
@@ -54,8 +54,8 @@ class ReportedIssuesDetailsForReceptionActivity : AppCompatActivity() {
         val imageEncoded: String? = ReportedIssuesActivity.issueList?.get(position)?.issueImageUrl
         val issue = Issue(id, title, block, room, description, reportedBy, date, status, imageEncoded)
         databaseReference?.setValue(issue)
-        mark_as_fixed.visibility = View.INVISIBLE
-        tick_mark.visibility = View.VISIBLE
+        markAsFixed.visibility = View.INVISIBLE
+        tickMark.visibility = View.VISIBLE
     }
 
     companion object {

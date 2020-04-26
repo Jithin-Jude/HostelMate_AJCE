@@ -32,7 +32,7 @@ class WidgetForInmates : AppWidgetProvider() {
             val widgetText = "Widget will be updated when you report an issue"
             // Construct the RemoteViews object
             val views = RemoteViews(context?.packageName, R.layout.widget_for_inmates)
-            views.setTextViewText(R.id.appwidget_text, widgetText)
+            views.setTextViewText(R.id.tvWidgetText, widgetText)
 
             // Instruct the widget manager to update the widget
             appWidgetManager?.updateAppWidget(appWidgetId, views)

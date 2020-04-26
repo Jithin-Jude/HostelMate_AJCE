@@ -8,7 +8,7 @@
     tools:context=".reportissue.ReportedIssuesActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_reported_issues"
+        android:id="@+id/rvReportedIssues"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="8dp"
@@ -23,7 +23,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ProgressBar
-        android:id="@+id/loading_issues"
+        android:id="@+id/pbLoadingIssues"
         android:indeterminateTint="@color/colorPrimary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -33,8 +33,8 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/rv_reported_issues"
-        app:layout_constraintEnd_toEndOf="@+id/rv_reported_issues"
+        app:layout_constraintBottom_toBottomOf="@+id/rvReportedIssues"
+        app:layout_constraintEnd_toEndOf="@+id/rvReportedIssues"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:targetApi="lollipop" />

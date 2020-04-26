@@ -38,13 +38,13 @@ class InmatesLoginActivity : AppCompatActivity() {
 
         mAuth = FirebaseAuth.getInstance()
 
-        sign_in_progress.setVisibility(View.INVISIBLE)
+        signInProgress.setVisibility(View.INVISIBLE)
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build()
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
-        sign_in_button.setOnClickListener(View.OnClickListener { signIn() })
+        signInButton.setOnClickListener(View.OnClickListener { signIn() })
     }
 
     public override fun onStart() {
@@ -60,7 +60,7 @@ class InmatesLoginActivity : AppCompatActivity() {
     private fun signIn() {
         val signInIntent = mGoogleSignInClient?.getSignInIntent()
         startActivityForResult(signInIntent, RC_SIGN_IN)
-        sign_in_progress.setVisibility(View.VISIBLE)
+        signInProgress.setVisibility(View.VISIBLE)
     }
 
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -75,7 +75,7 @@ class InmatesLoginActivity : AppCompatActivity() {
                 firebaseAuthWithGoogle(account)
             } catch (e: ApiException) {
                 // Google Sign In failed, update UI appropriately
-                sign_in_progress.setVisibility(View.INVISIBLE)
+                signInProgress.setVisibility(View.INVISIBLE)
                 Toast.makeText(this, R.string.google_sign_in_failed, Toast.LENGTH_LONG).show()
             }
         }
@@ -94,7 +94,7 @@ class InmatesLoginActivity : AppCompatActivity() {
                         //updateUI(user);
                     } else {
                         // If sign in fails, display a message to the user.
-                        sign_in_progress.setVisibility(View.INVISIBLE)
+                        signInProgress.setVisibility(View.INVISIBLE)
                         Toast.makeText(applicationContext, R.string.signIn_with_credential_failure, Toast.LENGTH_LONG).show()
                         //updateUI(null);
                     }
@@ -102,7 +102,7 @@ class InmatesLoginActivity : AppCompatActivity() {
     }
 
     fun successSignIn() {
-        sign_in_progress.setVisibility(View.INVISIBLE)
+        signInProgress.setVisibility(View.INVISIBLE)
         val acct = GoogleSignIn.getLastSignedInAccount(this)
         var personName: String? = null
         var personGivenName: String? = null

@@ -29,11 +29,11 @@ class ReceptionIssueRecyclerViewHolder(itemView: View?) : RecyclerView.ViewHolde
 
     init {
         context = itemView?.context
-        title = itemView?.findViewById(R.id.tv_title)!!
-        date = itemView.findViewById(R.id.date)
-        blockAndRoom = itemView.findViewById(R.id.block_and_room)
-        issueStatus = itemView.findViewById(R.id.tv_status)
-        imageView = itemView.findViewById(R.id.recycler_view_image)
+        title = itemView?.findViewById(R.id.tvTitle)!!
+        date = itemView.findViewById(R.id.tvDate)
+        blockAndRoom = itemView.findViewById(R.id.tvBlockAndRoom)
+        issueStatus = itemView.findViewById(R.id.tvStatus)
+        imageView = itemView.findViewById(R.id.ivIssueImage)
         itemView.setOnClickListener(this)
     }
 }

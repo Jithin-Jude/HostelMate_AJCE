@@ -12,7 +12,8 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.ProgressBar
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModelProviders
 import com.ajce.hostelmate.ControlPanelActivity
 import com.ajce.hostelmate.R
 import com.ajce.hostelmate.WidgetForInmates
@@ -39,27 +40,27 @@ class ReportedIssuesActivity : AppCompatActivity() {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
         editor = sharedPreferences.edit()
 
-        loading_issues.setVisibility(View.VISIBLE)
-        databaseIssue = FirebaseDatabase.getInstance().getReference("issues")
-        databaseIssue.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                issueList?.clear()
-                for (issueSnapshot in dataSnapshot.children) {
-                    val issue = issueSnapshot.getValue(Issue::class.java)
-                    issueList?.add(issue)
-                }
-                if (!sharedPreferences.getBoolean("NOTIFICATIONS_ON", false)) {
-                    issueList?.size?.let { editor.putInt("NUMBER_OF_ISSUES", it) }
-                    editor.apply()
-                }
-                val recyclerView = findViewById<View?>(R.id.rv_reported_issues) as RecyclerView
-                recyclerView.layoutManager = LinearLayoutManager(applicationContext)
-                adapter = ReceptionIssueRecyclerViewAdapter(applicationContext, issueList)
-                recyclerView.adapter = adapter
-                loading_issues.setVisibility(View.GONE)
-            }
+        pbLoadingIssues.visibility = View.VISIBLE
 
-            override fun onCancelled(databaseError: DatabaseError) {}
+        val viewModel: IssueViewModel by lazy { ViewModelProviders.of(this).get(IssueViewModel::class.java) }
+
+        val liveData: LiveData<DataSnapshot?> = viewModel.getDataSnapshotLiveData()
+
+        liveData.observe(this, androidx.lifecycle.Observer { dataSnapshot ->
+            issueList?.clear()
+            for (issueSnapshot in dataSnapshot?.children!!) {
+                val issue = issueSnapshot.getValue(Issue::class.java)
+                issueList?.add(issue)
+            }
+            if (!sharedPreferences.getBoolean("NOTIFICATIONS_ON", false)) {
+                issueList?.size?.let { editor.putInt("NUMBER_OF_ISSUES", it) }
+                editor.apply()
+            }
+            val recyclerView = findViewById<View?>(R.id.rvReportedIssues) as RecyclerView
+            recyclerView.layoutManager = LinearLayoutManager(applicationContext)
+            adapter = ReceptionIssueRecyclerViewAdapter(applicationContext, issueList)
+            recyclerView.adapter = adapter
+            pbLoadingIssues.visibility = View.GONE
         })
     }
 
