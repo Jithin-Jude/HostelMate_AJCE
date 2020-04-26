@@ -90,9 +90,7 @@ class ReportAnIssueActivity : AppCompatActivity() {
             photo!!.compress(Bitmap.CompressFormat.PNG, 100, baos)
             val imgData = baos.toByteArray()
 
-            uploadImage("", imgData)
-
-            //imageEncoded = Base64.encodeToString(baos.toByteArray(), Base64.DEFAULT)
+            uploadImage(getTimeStamp(), imgData)
         }
     }
 
@@ -103,7 +101,7 @@ class ReportAnIssueActivity : AppCompatActivity() {
         var downloadUri = ""
 
         if(imgData.isNotEmpty()){
-            val ref = storageReference?.child("issueImages/" + timeStamp +"_issue")
+            val ref = storageReference?.child("issueImages/issue_" + timeStamp)
             val uploadTask = ref?.putBytes(imgData)
 
             val urlTask = uploadTask?.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
@@ -130,6 +128,11 @@ class ReportAnIssueActivity : AppCompatActivity() {
         }
     }
 
+    fun getTimeStamp(): String{
+        val s = SimpleDateFormat("ddMMyyyyhhmmss", Locale.US)
+        val timeStamp = s.format(Date())
+        return timeStamp
+    }
 
     fun updateWidget(widgetText: String?) {
         val appWidgetManager = AppWidgetManager.getInstance(this)
