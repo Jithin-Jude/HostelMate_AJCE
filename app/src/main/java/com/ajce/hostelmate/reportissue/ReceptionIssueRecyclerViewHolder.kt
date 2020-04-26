@@ -29,7 +29,7 @@ class ReceptionIssueRecyclerViewHolder(itemView: View?) : RecyclerView.ViewHolde
     }
 
     init {
-        context = itemView?.getContext()
+        context = itemView?.context
         title = itemView?.findViewById(R.id.tv_title)!!
         date = itemView.findViewById(R.id.date)
         blockAndRoom = itemView.findViewById(R.id.block_and_room)

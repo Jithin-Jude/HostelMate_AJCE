@@ -17,14 +17,16 @@ import com.ajce.hostelmate.ControlPanelActivity
 import com.ajce.hostelmate.R
 import com.ajce.hostelmate.WidgetForInmates
 import com.google.firebase.database.*
+import kotlinx.android.synthetic.main.activity_reported_issues.*
 import java.util.*
 
 class ReportedIssuesActivity : AppCompatActivity() {
+
     lateinit var adapter: ReceptionIssueRecyclerViewAdapter
     lateinit var databaseIssue: DatabaseReference
-    lateinit var progressBarLodingIssues: ProgressBar
     lateinit var sharedPreferences: SharedPreferences
     lateinit var editor: SharedPreferences.Editor
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reported_issues)
@@ -36,8 +38,8 @@ class ReportedIssuesActivity : AppCompatActivity() {
                 PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP)
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
         editor = sharedPreferences.edit()
-        progressBarLodingIssues = findViewById(R.id.loading_issues)
-        progressBarLodingIssues.setVisibility(View.VISIBLE)
+
+        loading_issues.setVisibility(View.VISIBLE)
         databaseIssue = FirebaseDatabase.getInstance().getReference("issues")
         databaseIssue.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -54,7 +56,7 @@ class ReportedIssuesActivity : AppCompatActivity() {
                 recyclerView.layoutManager = LinearLayoutManager(applicationContext)
                 adapter = ReceptionIssueRecyclerViewAdapter(applicationContext, issueList)
                 recyclerView.adapter = adapter
-                progressBarLodingIssues.setVisibility(View.GONE)
+                loading_issues.setVisibility(View.GONE)
             }
 
             override fun onCancelled(databaseError: DatabaseError) {}

@@ -11,27 +11,28 @@ import android.text.InputFilter
 import android.view.View
 import android.widget.CompoundButton
 import android.widget.EditText
-import android.widget.Switch
 import android.widget.Toast
 import com.ajce.hostelmate.login.AdminLogin
 import com.google.firebase.database.FirebaseDatabase
+import kotlinx.android.synthetic.main.activity_control_panel.*
 import java.util.*
 
 class ControlPanelActivity : AppCompatActivity() {
-    lateinit var notificationSwitch: Switch
+
     lateinit var sharedPreferences: SharedPreferences
     lateinit var editor: SharedPreferences.Editor
     var adminLoginList: MutableList<AdminLogin?>? = ArrayList()
     var NOTIFICATIONS_ON: String? = "NOTIFICATIONS_ON"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_control_panel)
         title = getString(R.string.control_panel)
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
         editor = sharedPreferences.edit()
-        notificationSwitch = findViewById(R.id.notification_switch)
-        notificationSwitch.setChecked(sharedPreferences.getBoolean(NOTIFICATIONS_ON, false))
-        notificationSwitch.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked -> // do something, the isChecked will be
+
+        notification_switch.isChecked = sharedPreferences.getBoolean(NOTIFICATIONS_ON, false)
+        notification_switch.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked -> // do something, the isChecked will be
             // true if the switch is in the On position
             if (isChecked) {
                 turnOnNotifications()

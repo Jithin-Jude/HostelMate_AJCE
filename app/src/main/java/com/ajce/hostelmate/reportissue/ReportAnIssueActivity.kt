@@ -17,38 +17,33 @@ import com.ajce.hostelmate.WidgetForInmates
 import com.ajce.hostelmate.login.InmatesLoginActivity
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import kotlinx.android.synthetic.main.activity_report_an_issue.*
 import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
 
 class ReportAnIssueActivity : AppCompatActivity() {
-    var titleEditText: EditText? = null
-    lateinit var spinnerBlock: Spinner
-    lateinit var spinnerRoom: Spinner
-    var descriptionEditText: EditText? = null
+
     var databaseIssue: DatabaseReference? = null
     var personEmail: String? = null
-    var mImageView: ImageView? = null
+
     var photo: Bitmap? = null
     var imageEncoded: String? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_report_an_issue)
         personEmail = intent.extras["PERSON_EMAIL"].toString()
         databaseIssue = FirebaseDatabase.getInstance().getReference("issues")
-        titleEditText = findViewById(R.id.ed_title)
-        spinnerBlock = findViewById(R.id.sp_block)
-        spinnerRoom = findViewById(R.id.sp_room)
-        descriptionEditText = findViewById(R.id.ed_description)
-        mImageView = findViewById(R.id.camera_img)
+
         val adapterSpinnerBlock = ArrayAdapter.createFromResource(this,
                 R.array.block_list, android.R.layout.simple_spinner_item)
         adapterSpinnerBlock.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinnerBlock.setAdapter(adapterSpinnerBlock)
+        sp_block.adapter = adapterSpinnerBlock
         val adapterSpinnerRoom = ArrayAdapter.createFromResource(this,
                 R.array.room_list, android.R.layout.simple_spinner_item)
         adapterSpinnerRoom.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinnerRoom.setAdapter(adapterSpinnerRoom)
+        sp_room.adapter = adapterSpinnerRoom
     }
 
     fun addIssue(view: View?) {
@@ -56,10 +51,10 @@ class ReportAnIssueActivity : AppCompatActivity() {
             Toast.makeText(this, "Take photo of Issue", Toast.LENGTH_LONG).show()
             return
         }
-        val title = titleEditText?.text.toString()
-        val block = spinnerBlock.selectedItem.toString()
-        val room = spinnerRoom.selectedItem.toString()
-        val description = descriptionEditText?.text.toString()
+        val title = ed_title?.text.toString()
+        val block = sp_block.selectedItem.toString()
+        val room = sp_room.selectedItem.toString()
+        val description = ed_description?.text.toString()
         val reportedBy = personEmail
         val id = databaseIssue?.push()?.key
         val date = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date())
@@ -78,7 +73,7 @@ class ReportAnIssueActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
             photo = data?.extras?.get("data") as Bitmap
-            mImageView?.setImageBitmap(photo)
+            camera_img?.setImageBitmap(photo)
             val baos = ByteArrayOutputStream()
             photo!!.compress(Bitmap.CompressFormat.PNG, 100, baos)
             imageEncoded = Base64.encodeToString(baos.toByteArray(), Base64.DEFAULT)

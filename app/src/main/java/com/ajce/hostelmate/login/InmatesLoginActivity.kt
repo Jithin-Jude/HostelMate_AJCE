@@ -33,10 +33,11 @@ class InmatesLoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_inmates_login)
+
         supportActionBar?.hide()
+
         mAuth = FirebaseAuth.getInstance()
-        //signInButton = findViewById(R.id.sign_in_button)
-        //signInProgress = findViewById(R.id.sign_in_progress)
+
         sign_in_progress.setVisibility(View.INVISIBLE)
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))

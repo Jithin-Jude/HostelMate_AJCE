@@ -6,28 +6,27 @@ import android.os.Bundle
 import android.preference.PreferenceManager
 import android.support.v7.app.AppCompatActivity
 import android.view.View
-import android.widget.EditText
 import android.widget.Toast
 import com.ajce.hostelmate.R
 import com.ajce.hostelmate.reportissue.ReportedIssuesActivity
 import com.google.firebase.database.*
+import kotlinx.android.synthetic.main.activity_reception_login.*
 import java.util.*
 
 class ReceptionLoginActivity : AppCompatActivity() {
+
     lateinit var sharedPreferences: SharedPreferences
     lateinit var editor: SharedPreferences.Editor
     var databaseIssue: DatabaseReference? = null
     var adminLoginList: MutableList<AdminLogin?>? = ArrayList()
     var userNamefromServer: String? = null
     var passwordfromServer: String? = null
-    var editTextUserName: EditText? = null
-    var editTextPassword: EditText? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reception_login)
         supportActionBar?.hide()
-        editTextUserName = findViewById(R.id.ed_user_name)
-        editTextPassword = findViewById(R.id.ed_password)
+
         databaseIssue = FirebaseDatabase.getInstance().getReference("admin_login")
         databaseIssue?.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -45,8 +44,8 @@ class ReceptionLoginActivity : AppCompatActivity() {
     }
 
     fun receptionLogin(view: View?) {
-        val givenUserName = editTextUserName?.getText().toString()
-        val givenPassword = editTextPassword?.getText().toString()
+        val givenUserName = ed_user_name?.text.toString()
+        val givenPassword = ed_password?.text.toString()
 
         /*
         String id = databaseIssue.push().getKey();

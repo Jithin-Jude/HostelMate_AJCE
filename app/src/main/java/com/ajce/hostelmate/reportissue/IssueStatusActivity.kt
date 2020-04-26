@@ -25,34 +25,39 @@ import com.bumptech.glide.request.RequestOptions
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import kotlinx.android.synthetic.main.nav_header_issue_status.*
+import kotlinx.android.synthetic.main.activity_issue_status.*
+import kotlinx.android.synthetic.main.content_issue_status.*
 import java.util.*
 
 class IssueStatusActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     lateinit var adapter: RecyclerViewAdapter
     lateinit var databaseIssue: DatabaseReference
-    lateinit var progressBarLodingIssuesForInmates: ProgressBar
+    //lateinit var progressBarLodingIssuesForInmates: ProgressBar
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_issue_status)
         val toolbar = findViewById<View?>(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
-        progressBarLodingIssuesForInmates = findViewById(R.id.loading_issues_for_inmates)
-        progressBarLodingIssuesForInmates.setVisibility(View.VISIBLE)
+
+        loading_issues_for_inmates.setVisibility(View.VISIBLE)
+
         val personName = intent.extras["PERSON_NAME"].toString()
         val personEmail = intent.extras["PERSON_EMAIL"].toString()
         val profilePicUri = intent.extras["PROFILE_PIC"].toString()
         val fab = findViewById<View?>(R.id.fab) as FloatingActionButton
+
         fab.setOnClickListener {
             val intent = Intent(applicationContext, ReportAnIssueActivity::class.java)
             intent.putExtra("PERSON_EMAIL", personEmail)
             startActivity(intent)
         }
-        val drawer = findViewById<View?>(R.id.drawer_layout) as DrawerLayout
+
+        //val drawer = findViewById<View?>(R.id.drawer_layout) as DrawerLayout
         val toggle = ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-        drawer.addDrawerListener(toggle)
+                this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
+
         val navigationView = findViewById<View?>(R.id.nav_view) as NavigationView
         navigationView.setNavigationItemSelectedListener(this)
         val header = navigationView.getHeaderView(0)
@@ -83,7 +88,7 @@ class IssueStatusActivity : AppCompatActivity(), NavigationView.OnNavigationItem
                 recyclerView.layoutManager = LinearLayoutManager(applicationContext)
                 adapter = RecyclerViewAdapter(applicationContext, issueList)
                 recyclerView.adapter = adapter
-                progressBarLodingIssuesForInmates.setVisibility(View.GONE)
+                loading_issues_for_inmates.visibility = View.GONE
             }
 
             override fun onCancelled(databaseError: DatabaseError) {}
