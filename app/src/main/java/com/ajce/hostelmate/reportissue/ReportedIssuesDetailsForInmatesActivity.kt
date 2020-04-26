@@ -3,7 +3,7 @@ package com.ajce.hostelmate.reportissue
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.util.Base64
 import com.ajce.hostelmate.R
 import kotlinx.android.synthetic.main.activity_reported_issues_details_for_inmates.*

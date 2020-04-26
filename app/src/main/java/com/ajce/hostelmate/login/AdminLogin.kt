@@ -2,7 +2,7 @@ package com.ajce.hostelmate.login
 
 import android.os.Parcel
 import android.os.Parcelable
-import android.support.annotation.Keep
+import androidx.annotation.Keep
 import com.google.firebase.database.IgnoreExtraProperties
 
 @IgnoreExtraProperties

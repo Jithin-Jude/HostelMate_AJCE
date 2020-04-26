@@ -10,8 +10,8 @@ import android.content.SharedPreferences
 import android.os.Build
 import android.os.IBinder
 import android.preference.PreferenceManager
-import android.support.v4.app.NotificationCompat
-import android.support.v4.app.NotificationManagerCompat
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import android.widget.Toast
 import com.ajce.hostelmate.login.ReceptionLoginActivity
 import com.ajce.hostelmate.reportissue.Issue
