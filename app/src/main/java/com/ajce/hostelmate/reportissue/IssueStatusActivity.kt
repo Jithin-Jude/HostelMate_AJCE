@@ -4,24 +4,31 @@ import android.appwidget.AppWidgetManager
 import android.content.ComponentName
 import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.navigation.NavigationView
-import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.appcompat.widget.Toolbar
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
-import android.widget.*
+import android.widget.ImageView
+import android.widget.RemoteViews
+import android.widget.TextView
+import android.widget.Toast
+import androidx.annotation.Nullable
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.ajce.hostelmate.R
 import com.ajce.hostelmate.WidgetForInmates
 import com.ajce.hostelmate.login.InmatesLoginActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_issue_status.*
@@ -31,7 +38,7 @@ import java.util.*
 class IssueStatusActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     lateinit var adapterIssueStatus: IssueStatusRecyclerViewAdapter
     lateinit var databaseIssue: DatabaseReference
-    //lateinit var progressBarLodingIssuesForInmates: ProgressBar
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_issue_status)
@@ -51,7 +58,6 @@ class IssueStatusActivity : AppCompatActivity(), NavigationView.OnNavigationItem
             startActivity(intent)
         }
 
-        //val drawer = findViewById<View?>(R.id.drawer_layout) as DrawerLayout
         val toggle = ActionBarDrawerToggle(
                 this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer_layout.addDrawerListener(toggle)
@@ -70,8 +76,32 @@ class IssueStatusActivity : AppCompatActivity(), NavigationView.OnNavigationItem
                 .into(profilePic!!)
         personNameTV?.text = personName
         personEmailTV?.text = personEmail
-        databaseIssue = FirebaseDatabase.getInstance().getReference("issues")
-        databaseIssue.addValueEventListener(object : ValueEventListener {
+
+        val viewModel: IssueViewModel by lazy { ViewModelProviders.of(this).get(IssueViewModel::class.java) }
+
+        val liveData: LiveData<DataSnapshot?> = viewModel.getDataSnapshotLiveData()
+
+        liveData.observe(this, androidx.lifecycle.Observer { dataSnapshot ->
+            issueList?.clear()
+            for (issueSnapshot in dataSnapshot?.children!!) {
+                val issue = issueSnapshot.getValue(Issue::class.java)
+                if (issue != null) {
+                    if (issue.issueReportedBy == personEmail) {
+                        issueList?.add(issue)
+                    }
+                }
+            }
+            if (issueList?.size != 0) updateWidget(issueList?.get(issueList!!.size - 1)?.issueStatus)
+            val recyclerView = findViewById<View?>(R.id.rv_issue_status) as RecyclerView
+            recyclerView.layoutManager = LinearLayoutManager(applicationContext)
+            adapterIssueStatus = IssueStatusRecyclerViewAdapter(applicationContext, issueList)
+            recyclerView.adapter = adapterIssueStatus
+            loading_issues_for_inmates.visibility = View.GONE
+        })
+
+/*        databaseIssue = FirebaseDatabase.getInstance().getReference("issues")
+
+        val listener: ValueEventListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 issueList?.clear()
                 for (issueSnapshot in dataSnapshot.children) {
@@ -90,8 +120,12 @@ class IssueStatusActivity : AppCompatActivity(), NavigationView.OnNavigationItem
                 loading_issues_for_inmates.visibility = View.GONE
             }
 
-            override fun onCancelled(databaseError: DatabaseError) {}
-        })
+            override fun onCancelled(databaseError: DatabaseError) {
+                Log.d("ERROR","ERROR: " + databaseError)
+            }
+        }
+
+        databaseIssue.addValueEventListener(listener)*/
     }
 
     override fun onBackPressed() {
