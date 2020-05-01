@@ -11,26 +11,26 @@ import kotlinx.android.synthetic.main.activity_reported_issues_details_for_inmat
 
 class ReportedIssuesDetailsForInmatesActivity : AppCompatActivity() {
 
+    val SELECTED_ISSUE: String = "selected_issue"
+    val SELECTED_POSITION: String = "selected_position"
+
+    lateinit var issue: Issue
+    var selectedPosition: Int = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reported_issues_details_for_inmates)
-        val position = intent.getIntExtra("POSITION_ID", 0)
+        issue = intent.getParcelableExtra(SELECTED_ISSUE)
+        selectedPosition = intent.getIntExtra(SELECTED_POSITION, 0)
 
-        title = IssueStatusActivity.issueList?.get(position)?.issueTitle
-        tvBlock.text = IssueStatusActivity.issueList?.get(position)?.issueBlock
-        tvRoom.text = IssueStatusActivity.issueList?.get(position)?.issueRoom
-        tvDescription.text = IssueStatusActivity.issueList?.get(position)?.issueDescription
-        tvStatusInmates.text = IssueStatusActivity.issueList?.get(position)?.issueStatus
+        title = issue.issueTitle
+        tvBlock.text = issue.issueBlock
+        tvRoom.text = issue.issueRoom
+        tvDescription.text = issue.issueDescription
+        tvStatusInmates.text = issue.issueStatus
 
         Glide.with(this)
-                .load(IssueStatusActivity.issueList?.get(position)?.issueImageUrl)
+                .load(issue.issueImageUrl)
                 .into(ivImgIssueInmates)
-    }
-
-    companion object {
-        fun decodeFromFirebaseBase64(image: String?): Bitmap? {
-            val decodedByteArray = Base64.decode(image, Base64.DEFAULT)
-            return BitmapFactory.decodeByteArray(decodedByteArray, 0, decodedByteArray.size)
-        }
     }
 }

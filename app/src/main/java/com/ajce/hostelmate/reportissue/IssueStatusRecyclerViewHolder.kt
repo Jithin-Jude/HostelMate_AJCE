@@ -6,30 +6,27 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.cardview.widget.CardView
 import com.ajce.hostelmate.R
 
 class IssueStatusRecyclerViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!), View.OnClickListener {
+    var item: CardView?
     var title: TextView?
     var date: TextView?
     var blockAndRoom: TextView?
     var issueStatus: TextView?
     var imageView: ImageView?
-    private var itemClickListenerIssueStatus: IssueStatusRecyclerViewClickListener? = null
+    var itemClickListenerIssueStatus: IssueStatusRecyclerViewClickListener? = null
     var context: Context?
 
     override fun onClick(view: View?) {
         itemClickListenerIssueStatus?.onItemClick(this.layoutPosition)
-        val intent = Intent(context, ReportedIssuesDetailsForInmatesActivity::class.java)
-        intent.putExtra("POSITION_ID", adapterPosition)
-        context?.startActivity(intent)
-    }
-
-    fun setItemClickListener(itemClickListenerIssueStatus: IssueStatusRecyclerViewClickListener?) {
-        this.itemClickListenerIssueStatus = itemClickListenerIssueStatus
     }
 
     init {
-        context = itemView?.getContext()
+        context = itemView?.context
+        item = itemView?.findViewById(R.id.itemCardView)
         title = itemView?.findViewById(R.id.tvTitle)
         date = itemView?.findViewById(R.id.tvDate)
         blockAndRoom = itemView?.findViewById(R.id.tvBlockAndRoom)

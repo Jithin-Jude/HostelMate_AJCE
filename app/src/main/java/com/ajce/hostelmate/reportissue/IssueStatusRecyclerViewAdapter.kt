@@ -1,6 +1,7 @@
 package com.ajce.hostelmate.reportissue
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import androidx.recyclerview.widget.RecyclerView
@@ -17,6 +18,9 @@ class IssueStatusRecyclerViewAdapter(var context: Context?, issueList: MutableLi
     private val issueList: MutableList<Issue?>?
     private val mInflater: LayoutInflater?
 
+    val SELECTED_ISSUE: String = "selected_issue"
+    val SELECTED_POSITION: String = "selected_position"
+
     // inflates the row layout from xml when needed
     override fun onCreateViewHolder(parent: ViewGroup, pos: Int): IssueStatusRecyclerViewHolder {
         val view = mInflater?.inflate(R.layout.recyclerview_row, parent, false)
@@ -31,33 +35,28 @@ class IssueStatusRecyclerViewAdapter(var context: Context?, issueList: MutableLi
         holderIssueStatus.date?.text = issueList?.get(pos)?.issueDate
         holderIssueStatus.issueStatus?.text = issueList?.get(pos)?.issueStatus
         if (issueList?.get(pos)?.issueStatus == "Fixed") {
-            holderIssueStatus.issueStatus?.setTextColor(context?.getResources()?.getColor(R.color.green)!!)
+            holderIssueStatus.issueStatus?.setTextColor(context?.resources?.getColor(R.color.green)!!)
         } else {
-            holderIssueStatus.issueStatus?.setTextColor(context?.getResources()?.getColor(R.color.red)!!)
+            holderIssueStatus.issueStatus?.setTextColor(context?.resources?.getColor(R.color.red)!!)
         }
 
         Glide.with(context!!)
                 .load(issueList?.get(pos)?.issueImageUrl)
                 .into(holderIssueStatus.imageView!!)
 
-        holderIssueStatus.setItemClickListener(object : IssueStatusRecyclerViewClickListener {
-            override fun onItemClick(pos: Int) {
+        holderIssueStatus.item?.setOnClickListener {
+            val intent = Intent(context, ReportedIssuesDetailsForInmatesActivity::class.java)
+            intent.putExtra(SELECTED_ISSUE, issueList?.get(pos))
+            intent.putExtra(SELECTED_POSITION,pos)
+            context!!.startActivity(intent)
 
-            }
-        })
+        }
     }
 
     // total number of rows
     override fun getItemCount(): Int {
         return issueList!!.size
         //return mCategoryRecyclerviewData.size();
-    }
-
-    companion object {
-        fun decodeFromFirebaseBase64(image: String?): Bitmap? {
-            val decodedByteArray = Base64.decode(image, Base64.DEFAULT)
-            return BitmapFactory.decodeByteArray(decodedByteArray, 0, decodedByteArray.size)
-        }
     }
 
     // data is passed into the constructor

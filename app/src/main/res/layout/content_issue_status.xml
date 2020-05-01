@@ -12,26 +12,10 @@
         android:id="@+id/dashboardContainer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="#ff0000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/bottomNavView"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvIssueStatus"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="@id/dashboardContainer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/dashboardContainer" />
 
     <ProgressBar
         android:id="@+id/loadingIssuesForInmates"
@@ -44,10 +28,11 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/rvIssueStatus"
-        app:layout_constraintEnd_toEndOf="@+id/rvIssueStatus"
-        app:layout_constraintStart_toStartOf="@+id/rvIssueStatus"
-        app:layout_constraintTop_toTopOf="@+id/rvIssueStatus"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/dashboardContainer"
+        app:layout_constraintEnd_toEndOf="@+id/dashboardContainer"
+        app:layout_constraintStart_toStartOf="@+id/dashboardContainer"
+        app:layout_constraintTop_toTopOf="@+id/dashboardContainer"
         tools:targetApi="lollipop" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

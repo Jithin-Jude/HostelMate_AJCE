@@ -26,7 +26,7 @@ class ReportedIssuesDetailsForReceptionActivity : AppCompatActivity() {
         tvReportedBy.text = ReportedIssuesActivity.issueList?.get(position)?.issueReportedBy
 
         Glide.with(this)
-                .load(IssueStatusActivity.issueList?.get(position)?.issueImageUrl)
+                .load(ReportedIssuesActivity.issueList?.get(position)?.issueImageUrl)
                 .into(ivImgIssue)
 
         if (ReportedIssuesActivity.Companion.issueList?.get(position)?.issueStatus == "Fixed") {

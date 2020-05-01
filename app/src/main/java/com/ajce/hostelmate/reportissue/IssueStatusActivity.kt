@@ -36,8 +36,8 @@ import kotlinx.android.synthetic.main.content_issue_status.*
 import java.util.*
 
 class IssueStatusActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-    lateinit var adapterIssueStatus: IssueStatusRecyclerViewAdapter
-    lateinit var databaseIssue: DatabaseReference
+
+    val USER_EMAIL: String = "user_email"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,18 +45,12 @@ class IssueStatusActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         val toolbar = findViewById<View?>(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
 
-        loadingIssuesForInmates.visibility = View.VISIBLE
+//        loadingIssuesForInmates.visibility = View.VISIBLE
 
         val personName = intent.extras["PERSON_NAME"].toString()
         val personEmail = intent.extras["PERSON_EMAIL"].toString()
         val profilePicUri = intent.extras["PROFILE_PIC"].toString()
-        val fab = findViewById<View?>(R.id.fab) as FloatingActionButton
-
-        fab.setOnClickListener {
-            val intent = Intent(applicationContext, ReportAnIssueActivity::class.java)
-            intent.putExtra("PERSON_EMAIL", personEmail)
-            startActivity(intent)
-        }
+//        val fab = findViewById<View?>(R.id.fab) as FloatingActionButton
 
         val toggle = ActionBarDrawerToggle(
                 this, drawer_layout, toolbar, R.string.navigation_drawer_open,
@@ -78,31 +72,11 @@ class IssueStatusActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         personNameTV?.text = personName
         personEmailTV?.text = personEmail
 
-        val viewModel: IssueViewModel by lazy { ViewModelProviders.of(this)
-                .get(IssueViewModel::class.java) }
-
-        val liveData: LiveData<DataSnapshot?> = viewModel.getDataSnapshotLiveData()
-
-        liveData.observe(this, androidx.lifecycle.Observer { dataSnapshot ->
-            issueList?.clear()
-            for (issueSnapshot in dataSnapshot?.children!!) {
-                val issue = issueSnapshot.getValue(Issue::class.java)
-                if (issue != null) {
-                    if (issue.issueReportedBy == personEmail) {
-                        issueList?.add(issue)
-                    }
-                }
-            }
-            if (issueList?.size != 0) updateWidget(issueList
-                    ?.get(issueList!!.size - 1)?.issueStatus)
-            val recyclerView = findViewById<View?>(R.id.rvIssueStatus) as RecyclerView
-            recyclerView.layoutManager = LinearLayoutManager(applicationContext)
-            adapterIssueStatus = IssueStatusRecyclerViewAdapter(applicationContext, issueList)
-            recyclerView.adapter = adapterIssueStatus
-            loadingIssuesForInmates.visibility = View.GONE
-        })
-
         val fragment = IssueFragment()
+        val bundle = Bundle().apply {
+            putString(USER_EMAIL, personEmail)
+        }
+        fragment.arguments = bundle
         supportFragmentManager.beginTransaction().replace(R.id.dashboardContainer, fragment, fragment.javaClass.simpleName)
                 .commit()
 
@@ -110,6 +84,10 @@ class IssueStatusActivity : AppCompatActivity(), NavigationView.OnNavigationItem
             when (menuItem.itemId) {
                 R.id.bNavIssue -> {
                     val fragment = IssueFragment()
+                    val bundle = Bundle().apply {
+                        putString(USER_EMAIL, personEmail)
+                    }
+                    fragment.arguments = bundle
                     supportFragmentManager.beginTransaction().replace(R.id.dashboardContainer, fragment, fragment.javaClass.simpleName)
                             .commit()
                     return@OnNavigationItemSelectedListener true
@@ -177,21 +155,7 @@ class IssueStatusActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         Toast.makeText(this, "Logged out ", Toast.LENGTH_LONG).show()
     }
 
-    fun updateWidget(isFixed: String?) {
-        val appWidgetManager = AppWidgetManager.getInstance(this)
-        val remoteViews = RemoteViews(this.packageName, R.layout.widget_for_inmates)
-        val thisWidget = ComponentName(this, WidgetForInmates::class.java)
-        val widgetText = issueList?.get(issueList!!.size - 1)?.issueTitle
-        remoteViews.setTextViewText(R.id.tvWidgetText, widgetText)
-        if (isFixed == "Fixed") {
-            remoteViews.setImageViewResource(R.id.ivIssueImgWidget, R.drawable.hostel_green)
-        } else {
-            remoteViews.setImageViewResource(R.id.ivIssueImgWidget, R.drawable.hostel_red)
-        }
-        appWidgetManager.updateAppWidget(thisWidget, remoteViews)
-    }
-
-    companion object {
+/*    companion object {
         var issueList: MutableList<Issue?>? = ArrayList()
-    }
+    }*/
 }
