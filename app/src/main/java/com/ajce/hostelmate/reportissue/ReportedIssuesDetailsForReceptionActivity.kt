@@ -22,6 +22,12 @@ class ReportedIssuesDetailsForReceptionActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reported_issues_details_for_reception)
+
+        //actionbar
+        val actionbar = supportActionBar
+        //set back button
+        actionbar?.setDisplayHomeAsUpEnabled(true)
+
         issue = intent.getParcelableExtra(SELECTED_ISSUE)
         selectedPosition = intent.getIntExtra(SELECTED_POSITION, 0)
 
@@ -44,6 +50,11 @@ class ReportedIssuesDetailsForReceptionActivity : AppCompatActivity() {
         }
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
+
     fun updateIssueStatus(view: View?) {
         val databaseReference = issue.issueId?.let {
             FirebaseDatabase.getInstance().getReference("issues")
@@ -63,11 +74,4 @@ class ReportedIssuesDetailsForReceptionActivity : AppCompatActivity() {
         markAsFixed.visibility = View.INVISIBLE
         tickMark.visibility = View.VISIBLE
     }
-
-/*    companion object {
-        fun decodeFromFirebaseBase64(image: String?): Bitmap? {
-            val decodedByteArray = Base64.decode(image, Base64.DEFAULT)
-            return BitmapFactory.decodeByteArray(decodedByteArray, 0, decodedByteArray.size)
-        }
-    }*/
 }

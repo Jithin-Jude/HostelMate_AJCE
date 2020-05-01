@@ -59,6 +59,7 @@ class ReceptionLoginActivity : AppCompatActivity() {
         Toast.makeText(this,"Admin Created!",Toast.LENGTH_LONG).show();
         */if (givenUserName == userNamefromServer && givenPassword == passwordfromServer) {
             val intent = Intent(this, ReceptionDashboardActivity::class.java)
+            intent.flags =  Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
             sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
             editor = sharedPreferences.edit()

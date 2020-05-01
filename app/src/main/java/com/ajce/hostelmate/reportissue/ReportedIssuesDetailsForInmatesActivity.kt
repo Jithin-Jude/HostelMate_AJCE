@@ -17,6 +17,12 @@ class ReportedIssuesDetailsForInmatesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reported_issues_details_for_inmates)
+
+        //actionbar
+        val actionbar = supportActionBar
+        //set back button
+        actionbar?.setDisplayHomeAsUpEnabled(true)
+
         issue = intent.getParcelableExtra(SELECTED_ISSUE)
         selectedPosition = intent.getIntExtra(SELECTED_POSITION, 0)
 
@@ -29,5 +35,10 @@ class ReportedIssuesDetailsForInmatesActivity : AppCompatActivity() {
         Glide.with(this)
                 .load(issue.issueImageUrl)
                 .into(ivImgIssueInmates)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }

@@ -13,6 +13,7 @@ import android.widget.CompoundButton
 import android.widget.EditText
 import android.widget.Toast
 import com.ajce.hostelmate.login.AdminLogin
+import com.ajce.hostelmate.login.ReceptionLoginActivity
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_control_panel.*
 import java.util.*
@@ -28,6 +29,12 @@ class ControlPanelActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_control_panel)
         title = getString(R.string.control_panel)
+
+        //actionbar
+        val actionbar = supportActionBar
+        //set back button
+        actionbar?.setDisplayHomeAsUpEnabled(true)
+
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
         editor = sharedPreferences.edit()
 
@@ -43,6 +50,17 @@ class ControlPanelActivity : AppCompatActivity() {
             }
             editor.apply()
         })
+
+        tvLogout.setOnClickListener {
+            val intent = Intent(this, ReceptionLoginActivity::class.java)
+            intent.flags =  Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+        }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
     private fun turnOnNotifications() {

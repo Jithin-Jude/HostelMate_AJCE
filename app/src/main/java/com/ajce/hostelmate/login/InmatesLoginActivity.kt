@@ -122,7 +122,7 @@ class InmatesLoginActivity : AppCompatActivity() {
     }
 
     fun successSignIn() {
-        signInProgress.setVisibility(View.INVISIBLE)
+        signInProgress.visibility = View.INVISIBLE
         val acct = GoogleSignIn.getLastSignedInAccount(this)
         var personName: String? = null
         var personGivenName: String? = null
@@ -139,6 +139,7 @@ class InmatesLoginActivity : AppCompatActivity() {
             personPhoto = acct.photoUrl
         }
         val intent = Intent(applicationContext, InmatesDashboardActivity::class.java)
+        intent.flags =  Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         intent.putExtra(USER_NAME, personName)
         intent.putExtra(USER_EMAIL, personEmail)
         intent.putExtra(PROFILE_PIC, personPhoto.toString())
@@ -148,7 +149,7 @@ class InmatesLoginActivity : AppCompatActivity() {
         editor.putString(FIRST_TIME_CHECK, "inmate")
         editor.apply()
         finish()
-        Toast.makeText(this, getString(R.string.welcome) + personName, Toast.LENGTH_LONG).show()
+        Toast.makeText(this, getString(R.string.welcome) + " " + personName, Toast.LENGTH_LONG).show()
     }
 
     companion object {
