@@ -13,23 +13,29 @@ import kotlinx.android.synthetic.main.activity_reported_issues_details_for_recep
 
 class ReportedIssuesDetailsForReceptionActivity : AppCompatActivity() {
 
-    var position = 0
+    val SELECTED_ISSUE: String = "selected_issue"
+    val SELECTED_POSITION: String = "selected_position"
+    
+    lateinit var issue: Issue
+    var selectedPosition: Int = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reported_issues_details_for_reception)
-        position = intent.getIntExtra("POSITION_ID", 0)
+        issue = intent.getParcelableExtra(SELECTED_ISSUE)
+        selectedPosition = intent.getIntExtra(SELECTED_POSITION, 0)
 
-        title = ReceptionDashboardActivity.issueList?.get(position)?.issueTitle
-        tvBlock.text = ReceptionDashboardActivity.issueList?.get(position)?.issueBlock
-        tvRoom.text = ReceptionDashboardActivity.issueList?.get(position)?.issueRoom
-        tvDescription.text = ReceptionDashboardActivity.issueList?.get(position)?.issueDescription
-        tvReportedBy.text = ReceptionDashboardActivity.issueList?.get(position)?.issueReportedBy
+        title = issue.issueTitle
+        tvBlock.text = issue.issueBlock
+        tvRoom.text = issue.issueRoom
+        tvDescription.text = issue.issueDescription
+        tvReportedBy.text = issue.issueReportedBy
 
         Glide.with(this)
-                .load(ReceptionDashboardActivity.issueList?.get(position)?.issueImageUrl)
+                .load(issue.issueImageUrl)
                 .into(ivImgIssue)
 
-        if (ReceptionDashboardActivity.Companion.issueList?.get(position)?.issueStatus == "Fixed") {
+        if (issue.issueStatus == "Fixed") {
             markAsFixed.visibility = View.INVISIBLE
             tickMark.visibility = View.VISIBLE
         } else {
@@ -39,29 +45,29 @@ class ReportedIssuesDetailsForReceptionActivity : AppCompatActivity() {
     }
 
     fun updateIssueStatus(view: View?) {
-        val databaseReference = ReceptionDashboardActivity.Companion.issueList?.get(position)?.issueId?.let {
+        val databaseReference = issue.issueId?.let {
             FirebaseDatabase.getInstance().getReference("issues")
                 .child(it)
         }
         val status = "Fixed"
-        val id: String? = ReceptionDashboardActivity.issueList?.get(position)?.issueId
-        val title: String? = ReceptionDashboardActivity.issueList?.get(position)?.issueTitle
-        val block: String? = ReceptionDashboardActivity.issueList?.get(position)?.issueBlock
-        val room: String? = ReceptionDashboardActivity.issueList?.get(position)?.issueRoom
-        val description: String? = ReceptionDashboardActivity.issueList?.get(position)?.issueDescription
-        val reportedBy: String? = ReceptionDashboardActivity.issueList?.get(position)?.issueReportedBy
-        val date: String? = ReceptionDashboardActivity.issueList?.get(position)?.issueDate
-        val imageEncoded: String? = ReceptionDashboardActivity.issueList?.get(position)?.issueImageUrl
+        val id: String? = issue.issueId
+        val title: String? = issue.issueTitle
+        val block: String? = issue.issueBlock
+        val room: String? = issue.issueRoom
+        val description: String? = issue.issueDescription
+        val reportedBy: String? = issue.issueReportedBy
+        val date: String? = issue.issueDate
+        val imageEncoded: String? = issue.issueImageUrl
         val issue = Issue(id, title, block, room, description, reportedBy, date, status, imageEncoded)
         databaseReference?.setValue(issue)
         markAsFixed.visibility = View.INVISIBLE
         tickMark.visibility = View.VISIBLE
     }
 
-    companion object {
+/*    companion object {
         fun decodeFromFirebaseBase64(image: String?): Bitmap? {
             val decodedByteArray = Base64.decode(image, Base64.DEFAULT)
             return BitmapFactory.decodeByteArray(decodedByteArray, 0, decodedByteArray.size)
         }
-    }
+    }*/
 }

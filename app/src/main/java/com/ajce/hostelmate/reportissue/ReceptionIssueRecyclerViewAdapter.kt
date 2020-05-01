@@ -1,6 +1,7 @@
 package com.ajce.hostelmate.reportissue
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import androidx.recyclerview.widget.RecyclerView
@@ -13,7 +14,13 @@ import com.bumptech.glide.Glide
 /**
  * Created by JithinJude on 15-03-2018.
  */
-class ReceptionIssueRecyclerViewAdapter internal constructor(var context: Context?, issueList: MutableList<Issue?>?) : RecyclerView.Adapter<ReceptionIssueRecyclerViewHolder?>() {
+class ReceptionIssueRecyclerViewAdapter
+internal constructor(var context: Context?,
+                     issueList: MutableList<Issue?>?) : RecyclerView.Adapter<ReceptionIssueRecyclerViewHolder?>() {
+
+    val SELECTED_ISSUE: String = "selected_issue"
+    val SELECTED_POSITION: String = "selected_position"
+
     private val issueList: MutableList<Issue?>?
     private val mInflater: LayoutInflater?
     private val mClickListenerIssueStatus: IssueStatusRecyclerViewClickListener? = null
@@ -41,11 +48,19 @@ class ReceptionIssueRecyclerViewAdapter internal constructor(var context: Contex
                 .load(issueList?.get(pos)?.issueImageUrl)
                 .into(holder.imageView)
 
-        holder.setItemClickListener(object : IssueStatusRecyclerViewClickListener {
+        holder.item?.setOnClickListener {
+            val intent = Intent(context, ReportedIssuesDetailsForReceptionActivity::class.java)
+            intent.putExtra(SELECTED_ISSUE, issueList?.get(pos))
+            intent.putExtra(SELECTED_POSITION,pos)
+            context!!.startActivity(intent)
+
+        }
+
+/*        holder.setItemClickListener(object : IssueStatusRecyclerViewClickListener {
             override fun onItemClick(pos: Int) {
 
             }
-        })
+        })*/
     }
 
     // total number of rows
@@ -54,12 +69,12 @@ class ReceptionIssueRecyclerViewAdapter internal constructor(var context: Contex
         //return mCategoryRecyclerviewData.size();
     }
 
-    companion object {
+/*    companion object {
         fun decodeFromFirebaseBase64(image: String?): Bitmap? {
             val decodedByteArray = Base64.decode(image, Base64.DEFAULT)
             return BitmapFactory.decodeByteArray(decodedByteArray, 0, decodedByteArray.size)
         }
-    }
+    }*/
 
     // data is passed into the constructor
     init {
