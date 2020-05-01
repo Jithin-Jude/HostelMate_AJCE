@@ -45,6 +45,12 @@ class ReportAnIssueActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_report_an_issue)
+
+        //actionbar
+        val actionbar = supportActionBar
+        //set back button
+        actionbar?.setDisplayHomeAsUpEnabled(true)
+
         personEmail = intent.extras[USER_EMAIL].toString()
         databaseIssue = FirebaseDatabase.getInstance().getReference("issues")
 
@@ -57,6 +63,11 @@ class ReportAnIssueActivity : AppCompatActivity() {
                 R.array.room_list, android.R.layout.simple_spinner_item)
         adapterSpinnerRoom.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spRoom.adapter = adapterSpinnerRoom
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
     fun addIssue(view: View?) {
