@@ -27,6 +27,9 @@ class ReceptionLoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_reception_login)
         supportActionBar?.hide()
 
+        progressBarFetchingPassword.visibility = View.VISIBLE
+        btnSignIn.isEnabled = false
+
         swapUserMode.setOnClickListener {
             val intent = Intent(applicationContext, InmatesLoginActivity::class.java)
             startActivity(intent)
@@ -42,6 +45,9 @@ class ReceptionLoginActivity : AppCompatActivity() {
                 }
                 userNamefromServer = adminLoginList?.get(0)?.userName
                 passwordfromServer = adminLoginList?.get(0)?.password
+
+                progressBarFetchingPassword.visibility = View.GONE
+                btnSignIn.isEnabled = true
             }
 
             override fun onCancelled(databaseError: DatabaseError) {}
