@@ -114,4 +114,8 @@
     <string name="issue_fixed_tick_mark">Issue fixed tick mark</string>
     <string name="thumbnail_of_issue">thumbnail of issue</string>
     <string name="issue_status_indicator">Issue status indicator</string>
+    <string name="sick_leave">Sick Leave</string>
+    <string name="night_study">Night Study</string>
+    <string name="notice_board">Notice Board</string>
+    <string name="request_feedback">Request Feedback</string>
 </resources>

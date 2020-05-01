@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
 import com.ajce.hostelmate.R
-import com.ajce.hostelmate.reportissue.ReportedIssuesActivity
+import com.ajce.hostelmate.reportissue.ReceptionDashboardActivity
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_reception_login.*
 import java.util.*
@@ -58,7 +58,7 @@ class ReceptionLoginActivity : AppCompatActivity() {
         databaseIssue.child(id).setValue(adminLogin);
         Toast.makeText(this,"Admin Created!",Toast.LENGTH_LONG).show();
         */if (givenUserName == userNamefromServer && givenPassword == passwordfromServer) {
-            val intent = Intent(this, ReportedIssuesActivity::class.java)
+            val intent = Intent(this, ReceptionDashboardActivity::class.java)
             startActivity(intent)
             sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
             editor = sharedPreferences.edit()

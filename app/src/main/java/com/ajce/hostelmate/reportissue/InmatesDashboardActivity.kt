@@ -21,7 +21,7 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.activity_issue_status.*
+import kotlinx.android.synthetic.main.activity_inmates_dashboard.*
 import kotlinx.android.synthetic.main.content_issue_status.*
 
 class InmatesDashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -32,7 +32,7 @@ class InmatesDashboardActivity : AppCompatActivity(), NavigationView.OnNavigatio
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_issue_status)
+        setContentView(R.layout.activity_inmates_dashboard)
         val toolbar = findViewById<View?>(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
 

@@ -32,6 +32,8 @@ import java.util.*
 
 class ReportAnIssueActivity : AppCompatActivity() {
 
+    val USER_EMAIL: String = "user_email"
+
     var databaseIssue: DatabaseReference? = null
     var firebaseStore: FirebaseStorage? = null
     var storageReference: StorageReference? = null
@@ -43,7 +45,7 @@ class ReportAnIssueActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_report_an_issue)
-        personEmail = intent.extras["PERSON_EMAIL"].toString()
+        personEmail = intent.extras[USER_EMAIL].toString()
         databaseIssue = FirebaseDatabase.getInstance().getReference("issues")
 
         val adapterSpinnerBlock = ArrayAdapter.createFromResource(this,

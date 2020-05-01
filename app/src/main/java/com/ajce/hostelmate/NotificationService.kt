@@ -15,7 +15,7 @@ import androidx.core.app.NotificationManagerCompat
 import android.widget.Toast
 import com.ajce.hostelmate.login.ReceptionLoginActivity
 import com.ajce.hostelmate.reportissue.Issue
-import com.ajce.hostelmate.reportissue.ReportedIssuesActivity
+import com.ajce.hostelmate.reportissue.ReceptionDashboardActivity
 import com.google.firebase.database.*
 import java.util.*
 
@@ -41,11 +41,11 @@ class NotificationService : Service() {
                     val issue = issueSnapshot.getValue(Issue::class.java)
                     issueList?.add(issue)
                 }
-                ReportedIssuesActivity.Companion.numberOfIssuesOld = sharedPreferences.getInt("NUMBER_OF_ISSUES", 0)
+                ReceptionDashboardActivity.Companion.numberOfIssuesOld = sharedPreferences.getInt("NUMBER_OF_ISSUES", 0)
                 //Toast.makeText(getApplicationContext(),"num Old : "+numberOfIssuesOld,Toast.LENGTH_LONG).show();
-                ReportedIssuesActivity.Companion.numberOfIssuesNew = issueList!!.size
+                ReceptionDashboardActivity.Companion.numberOfIssuesNew = issueList!!.size
                 //Toast.makeText(getApplicationContext(),"num New : "+numberOfIssuesNew,Toast.LENGTH_LONG).show();
-                if (ReportedIssuesActivity.Companion.numberOfIssuesNew > ReportedIssuesActivity.Companion.numberOfIssuesOld) {
+                if (ReceptionDashboardActivity.Companion.numberOfIssuesNew > ReceptionDashboardActivity.Companion.numberOfIssuesOld) {
                     displayNotification()
                 }
                 editor.putInt("NUMBER_OF_ISSUES", issueList!!.size)

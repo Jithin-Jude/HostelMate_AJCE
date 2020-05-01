@@ -25,7 +25,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name="com.ajce.hostelmate.reportissue.ReportedIssuesDetailsForInmatesActivity" />
         <activity android:name="com.ajce.hostelmate.reportissue.ReportAnIssueActivity" />
-        <activity android:name="com.ajce.hostelmate.reportissue.ReportedIssuesActivity" />
+        <activity android:name="com.ajce.hostelmate.reportissue.ReceptionDashboardActivity" />
         <activity android:name="com.ajce.hostelmate.reportissue.ReportedIssuesDetailsForReceptionActivity" />
         <activity
             android:name="com.ajce.hostelmate.SplashScreenActivity"

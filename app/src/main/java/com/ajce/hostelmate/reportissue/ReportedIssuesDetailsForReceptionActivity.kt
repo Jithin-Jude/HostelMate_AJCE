@@ -19,17 +19,17 @@ class ReportedIssuesDetailsForReceptionActivity : AppCompatActivity() {
         setContentView(R.layout.activity_reported_issues_details_for_reception)
         position = intent.getIntExtra("POSITION_ID", 0)
 
-        title = ReportedIssuesActivity.issueList?.get(position)?.issueTitle
-        tvBlock.text = ReportedIssuesActivity.issueList?.get(position)?.issueBlock
-        tvRoom.text = ReportedIssuesActivity.issueList?.get(position)?.issueRoom
-        tvDescription.text = ReportedIssuesActivity.issueList?.get(position)?.issueDescription
-        tvReportedBy.text = ReportedIssuesActivity.issueList?.get(position)?.issueReportedBy
+        title = ReceptionDashboardActivity.issueList?.get(position)?.issueTitle
+        tvBlock.text = ReceptionDashboardActivity.issueList?.get(position)?.issueBlock
+        tvRoom.text = ReceptionDashboardActivity.issueList?.get(position)?.issueRoom
+        tvDescription.text = ReceptionDashboardActivity.issueList?.get(position)?.issueDescription
+        tvReportedBy.text = ReceptionDashboardActivity.issueList?.get(position)?.issueReportedBy
 
         Glide.with(this)
-                .load(ReportedIssuesActivity.issueList?.get(position)?.issueImageUrl)
+                .load(ReceptionDashboardActivity.issueList?.get(position)?.issueImageUrl)
                 .into(ivImgIssue)
 
-        if (ReportedIssuesActivity.Companion.issueList?.get(position)?.issueStatus == "Fixed") {
+        if (ReceptionDashboardActivity.Companion.issueList?.get(position)?.issueStatus == "Fixed") {
             markAsFixed.visibility = View.INVISIBLE
             tickMark.visibility = View.VISIBLE
         } else {
@@ -39,19 +39,19 @@ class ReportedIssuesDetailsForReceptionActivity : AppCompatActivity() {
     }
 
     fun updateIssueStatus(view: View?) {
-        val databaseReference = ReportedIssuesActivity.Companion.issueList?.get(position)?.issueId?.let {
+        val databaseReference = ReceptionDashboardActivity.Companion.issueList?.get(position)?.issueId?.let {
             FirebaseDatabase.getInstance().getReference("issues")
                 .child(it)
         }
         val status = "Fixed"
-        val id: String? = ReportedIssuesActivity.issueList?.get(position)?.issueId
-        val title: String? = ReportedIssuesActivity.issueList?.get(position)?.issueTitle
-        val block: String? = ReportedIssuesActivity.issueList?.get(position)?.issueBlock
-        val room: String? = ReportedIssuesActivity.issueList?.get(position)?.issueRoom
-        val description: String? = ReportedIssuesActivity.issueList?.get(position)?.issueDescription
-        val reportedBy: String? = ReportedIssuesActivity.issueList?.get(position)?.issueReportedBy
-        val date: String? = ReportedIssuesActivity.issueList?.get(position)?.issueDate
-        val imageEncoded: String? = ReportedIssuesActivity.issueList?.get(position)?.issueImageUrl
+        val id: String? = ReceptionDashboardActivity.issueList?.get(position)?.issueId
+        val title: String? = ReceptionDashboardActivity.issueList?.get(position)?.issueTitle
+        val block: String? = ReceptionDashboardActivity.issueList?.get(position)?.issueBlock
+        val room: String? = ReceptionDashboardActivity.issueList?.get(position)?.issueRoom
+        val description: String? = ReceptionDashboardActivity.issueList?.get(position)?.issueDescription
+        val reportedBy: String? = ReceptionDashboardActivity.issueList?.get(position)?.issueReportedBy
+        val date: String? = ReceptionDashboardActivity.issueList?.get(position)?.issueDate
+        val imageEncoded: String? = ReceptionDashboardActivity.issueList?.get(position)?.issueImageUrl
         val issue = Issue(id, title, block, room, description, reportedBy, date, status, imageEncoded)
         databaseReference?.setValue(issue)
         markAsFixed.visibility = View.INVISIBLE
