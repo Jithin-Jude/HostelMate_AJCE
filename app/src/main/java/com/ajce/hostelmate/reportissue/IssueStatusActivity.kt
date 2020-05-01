@@ -1,13 +1,10 @@
 package com.ajce.hostelmate.reportissue
 
-import android.appwidget.AppWidgetManager
-import android.content.ComponentName
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
-import android.widget.RemoteViews
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -15,29 +12,23 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.ajce.hostelmate.R
-import com.ajce.hostelmate.WidgetForInmates
 import com.ajce.hostelmate.fragments.*
 import com.ajce.hostelmate.login.InmatesLoginActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_issue_status.*
 import kotlinx.android.synthetic.main.content_issue_status.*
-import java.util.*
 
 class IssueStatusActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-    val USER_EMAIL: String = "user_email"
+    var USER_NAME: String? = "user_name"
+    var USER_EMAIL: String? = "user_email"
+    var PROFILE_PIC: String? = "profile_pic"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,10 +38,9 @@ class IssueStatusActivity : AppCompatActivity(), NavigationView.OnNavigationItem
 
 //        loadingIssuesForInmates.visibility = View.VISIBLE
 
-        val personName = intent.extras["PERSON_NAME"].toString()
-        val personEmail = intent.extras["PERSON_EMAIL"].toString()
-        val profilePicUri = intent.extras["PROFILE_PIC"].toString()
-//        val fab = findViewById<View?>(R.id.fab) as FloatingActionButton
+        val personName = intent.extras[USER_NAME].toString()
+        val personEmail = intent.extras[USER_EMAIL].toString()
+        val profilePicUri = intent.extras[PROFILE_PIC].toString()
 
         val toggle = ActionBarDrawerToggle(
                 this, drawer_layout, toolbar, R.string.navigation_drawer_open,
@@ -154,8 +144,4 @@ class IssueStatusActivity : AppCompatActivity(), NavigationView.OnNavigationItem
                 })
         Toast.makeText(this, "Logged out ", Toast.LENGTH_LONG).show()
     }
-
-/*    companion object {
-        var issueList: MutableList<Issue?>? = ArrayList()
-    }*/
 }

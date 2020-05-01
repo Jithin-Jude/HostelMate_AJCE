@@ -13,7 +13,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.ajce.hostelmate.R
 import com.ajce.hostelmate.WidgetForInmates
 import com.ajce.hostelmate.reportissue.*

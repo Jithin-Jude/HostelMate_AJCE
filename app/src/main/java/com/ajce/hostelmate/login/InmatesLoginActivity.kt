@@ -10,7 +10,6 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.ajce.hostelmate.R
-import com.ajce.hostelmate.Utils
 import com.ajce.hostelmate.reportissue.IssueStatusActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -22,10 +21,10 @@ import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.android.synthetic.main.activity_inmates_login.*
 
 class InmatesLoginActivity : AppCompatActivity() {
-    var PERSON_NAME: String? = "PERSON_NAME"
-    var PERSON_EMAIL: String? = "PERSON_EMAIL"
-    var PROFILE_PIC: String? = "PROFILE_PIC"
-    var FIRST_TIME_CHECK: String? = "FIRST_TIME_CHECK"
+    var USER_NAME: String? = "user_name"
+    var USER_EMAIL: String? = "user_email"
+    var PROFILE_PIC: String? = "profile_pic"
+    var FIRST_TIME_CHECK: String? = "first_time_check"
 
     var INMATE: String = "inmate"
     var RECEPTIONIST: String = "receptionist"
@@ -140,8 +139,8 @@ class InmatesLoginActivity : AppCompatActivity() {
             personPhoto = acct.photoUrl
         }
         val intent = Intent(applicationContext, IssueStatusActivity::class.java)
-        intent.putExtra(PERSON_NAME, personName)
-        intent.putExtra(PERSON_EMAIL, personEmail)
+        intent.putExtra(USER_NAME, personName)
+        intent.putExtra(USER_EMAIL, personEmail)
         intent.putExtra(PROFILE_PIC, personPhoto.toString())
         startActivity(intent)
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)

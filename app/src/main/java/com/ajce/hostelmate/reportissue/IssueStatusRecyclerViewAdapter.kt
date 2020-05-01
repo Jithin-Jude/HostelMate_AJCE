@@ -2,10 +2,7 @@ package com.ajce.hostelmate.reportissue
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import androidx.recyclerview.widget.RecyclerView
-import android.util.Base64
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.ajce.hostelmate.R
