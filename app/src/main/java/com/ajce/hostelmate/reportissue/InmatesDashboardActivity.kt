@@ -24,7 +24,7 @@ import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_issue_status.*
 import kotlinx.android.synthetic.main.content_issue_status.*
 
-class IssueStatusActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class InmatesDashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     var USER_NAME: String? = "user_name"
     var USER_EMAIL: String? = "user_email"

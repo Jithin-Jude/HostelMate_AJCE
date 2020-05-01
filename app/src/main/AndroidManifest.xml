@@ -20,7 +20,7 @@
         <activity android:name="com.ajce.hostelmate.login.InmatesLoginActivity" />
         <activity android:name="com.ajce.hostelmate.login.ReceptionLoginActivity" />
         <activity
-            android:name="com.ajce.hostelmate.reportissue.IssueStatusActivity"
+            android:name="com.ajce.hostelmate.reportissue.InmatesDashboardActivity"
             android:label="@string/title_activity_issue_status"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name="com.ajce.hostelmate.reportissue.ReportedIssuesDetailsForInmatesActivity" />

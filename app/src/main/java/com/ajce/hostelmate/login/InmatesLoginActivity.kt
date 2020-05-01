@@ -10,7 +10,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.ajce.hostelmate.R
-import com.ajce.hostelmate.reportissue.IssueStatusActivity
+import com.ajce.hostelmate.reportissue.InmatesDashboardActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -138,7 +138,7 @@ class InmatesLoginActivity : AppCompatActivity() {
             personId = acct.id
             personPhoto = acct.photoUrl
         }
-        val intent = Intent(applicationContext, IssueStatusActivity::class.java)
+        val intent = Intent(applicationContext, InmatesDashboardActivity::class.java)
         intent.putExtra(USER_NAME, personName)
         intent.putExtra(USER_EMAIL, personEmail)
         intent.putExtra(PROFILE_PIC, personPhoto.toString())
