@@ -63,6 +63,7 @@ class IssueFragment : Fragment() {
                     ?.get(issueList!!.size - 1)?.issueStatus)
 
             rvIssueStatus.layoutManager = LinearLayoutManager(context)
+            issueList?.reverse()
             adapterIssueStatus = IssueStatusRecyclerViewAdapter(context, issueList)
             rvIssueStatus.adapter = adapterIssueStatus
             activity?.loadingIssuesForInmates?.visibility = View.GONE

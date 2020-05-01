@@ -25,6 +25,8 @@ import kotlinx.android.synthetic.main.fragment_issue_reception.*
  * Created by JithinJude on 01,May,2020
  */
 class ReceptionIssueFragment : Fragment() {
+    
+    var issueList: MutableList<Issue?>? = ArrayList()
 
     lateinit var adapter: ReceptionIssueRecyclerViewAdapter
     lateinit var sharedPreferences: SharedPreferences
@@ -46,18 +48,19 @@ class ReceptionIssueFragment : Fragment() {
         val liveData: LiveData<DataSnapshot?> = viewModel.getDataSnapshotLiveData()
 
         liveData.observe(this, androidx.lifecycle.Observer { dataSnapshot ->
-            ReceptionDashboardActivity.issueList?.clear()
+            issueList?.clear()
             for (issueSnapshot in dataSnapshot?.children!!) {
                 val issue = issueSnapshot.getValue(Issue::class.java)
-                ReceptionDashboardActivity.issueList?.add(issue)
+                issueList?.add(issue)
             }
             if (!sharedPreferences.getBoolean("NOTIFICATIONS_ON", false)) {
-                ReceptionDashboardActivity.issueList?.size?.let { editor.putInt("NUMBER_OF_ISSUES", it) }
+                issueList?.size?.let { editor.putInt("NUMBER_OF_ISSUES", it) }
                 editor.apply()
             }
 
             rvReportedIssues.layoutManager = LinearLayoutManager(context)
-            adapter = ReceptionIssueRecyclerViewAdapter(context, ReceptionDashboardActivity.issueList)
+            issueList?.reverse()
+            adapter = ReceptionIssueRecyclerViewAdapter(context, issueList)
             rvReportedIssues.adapter = adapter
             activity!!.pbLoadingIssues.visibility = View.GONE
         })
