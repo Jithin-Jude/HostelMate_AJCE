@@ -8,20 +8,30 @@
     tools:context=".reportissue.IssueStatusActivity"
     tools:showIn="@layout/app_bar_issue_status">
 
+    <FrameLayout
+        android:id="@+id/dashboardContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#ff0000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavView"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvIssueStatus"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/dashboardContainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/dashboardContainer" />
 
     <ProgressBar
         android:id="@+id/loadingIssuesForInmates"
@@ -39,4 +49,16 @@
         app:layout_constraintStart_toStartOf="@+id/rvIssueStatus"
         app:layout_constraintTop_toTopOf="@+id/rvIssueStatus"
         tools:targetApi="lollipop" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:itemBackground="@color/colorPrimary"
+        app:itemIconTint="@android:color/white"
+        app:itemTextColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dashboardContainer"
+        app:menu="@menu/inmates_bottom_navigation" />
 </androidx.constraintlayout.widget.ConstraintLayout>

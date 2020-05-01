@@ -74,8 +74,8 @@
     </string-array>
     <string name="notifications">Notifications</string>
     <string name="change_password">Change Password</string>
-    <string name="inmates_login">Inmates Login</string>
-    <string name="receptionist_login">Receptionist Login</string>
+    <string name="inmates_login">Inmates\nLogin</string>
+    <string name="receptionist_login">Receptionist\nLogin</string>
     <string name="a_hostel_issue_reporting_system">A hostel assistant system</string>
     <string name="no_network">no network</string>
     <string name="no_network_turn_on_network_and_restart_hostel_mate">No network! Turn on network and restart Hostel Mate</string>
