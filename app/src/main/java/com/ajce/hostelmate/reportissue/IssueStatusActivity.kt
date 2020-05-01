@@ -21,10 +21,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ajce.hostelmate.R
 import com.ajce.hostelmate.WidgetForInmates
+import com.ajce.hostelmate.fragments.*
 import com.ajce.hostelmate.login.InmatesLoginActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -99,6 +101,48 @@ class IssueStatusActivity : AppCompatActivity(), NavigationView.OnNavigationItem
             recyclerView.adapter = adapterIssueStatus
             loadingIssuesForInmates.visibility = View.GONE
         })
+
+        val fragment = IssueFragment()
+        supportFragmentManager.beginTransaction().replace(R.id.dashboardContainer, fragment, fragment.javaClass.simpleName)
+                .commit()
+
+        val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.bNavIssue -> {
+                    val fragment = IssueFragment()
+                    supportFragmentManager.beginTransaction().replace(R.id.dashboardContainer, fragment, fragment.javaClass.simpleName)
+                            .commit()
+                    return@OnNavigationItemSelectedListener true
+                }
+                R.id.bNavSickLeave -> {
+                    val fragment = SickLeaveFragment()
+                    supportFragmentManager.beginTransaction().replace(R.id.dashboardContainer, fragment, fragment.javaClass.simpleName)
+                            .commit()
+                    return@OnNavigationItemSelectedListener true
+                }
+                R.id.bNavNightStudy -> {
+                    val fragment = NightStudyFragment()
+                    supportFragmentManager.beginTransaction().replace(R.id.dashboardContainer, fragment, fragment.javaClass.simpleName)
+                            .commit()
+                    return@OnNavigationItemSelectedListener true
+                }
+                R.id.bNavNoticeBoard -> {
+                    val fragment = NoticeBoardFragment()
+                    supportFragmentManager.beginTransaction().replace(R.id.dashboardContainer, fragment, fragment.javaClass.getSimpleName())
+                            .commit()
+                    return@OnNavigationItemSelectedListener true
+                }
+                R.id.bNavFeedback -> {
+                    val fragment = FeedbackFragment()
+                    supportFragmentManager.beginTransaction().replace(R.id.dashboardContainer, fragment, fragment.javaClass.getSimpleName())
+                            .commit()
+                    return@OnNavigationItemSelectedListener true
+                }
+            }
+            false
+        }
+
+        bottomNavView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
     }
 
     override fun onBackPressed() {
