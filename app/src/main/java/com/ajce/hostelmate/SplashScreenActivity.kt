@@ -9,7 +9,6 @@ import android.os.Bundle
 import android.preference.PreferenceManager
 import androidx.appcompat.app.AppCompatActivity
 import com.ajce.hostelmate.login.InmatesLoginActivity
-import com.ajce.hostelmate.login.LoginSelectActivity
 import com.ajce.hostelmate.login.ReceptionLoginActivity
 
 class SplashScreenActivity : AppCompatActivity() {
@@ -57,7 +56,7 @@ class SplashScreenActivity : AppCompatActivity() {
             editor.apply()
             if (isNetwork()) {
                 if (firstTimeCheck == null) {
-                    val intent = Intent(this@SplashScreenActivity, LoginSelectActivity::class.java)
+                    val intent = Intent(this@SplashScreenActivity, InmatesLoginActivity::class.java)
                     startActivity(intent)
                 } else if (firstTimeCheck == "admin") {
                     val intent = Intent(this@SplashScreenActivity, ReceptionLoginActivity::class.java)

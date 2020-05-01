@@ -43,7 +43,7 @@ class IssueStatusActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         val toolbar = findViewById<View?>(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
 
-        loadingIssuesForInmates.setVisibility(View.VISIBLE)
+        loadingIssuesForInmates.visibility = View.VISIBLE
 
         val personName = intent.extras["PERSON_NAME"].toString()
         val personEmail = intent.extras["PERSON_EMAIL"].toString()
@@ -57,7 +57,8 @@ class IssueStatusActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         }
 
         val toggle = ActionBarDrawerToggle(
-                this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+                this, drawer_layout, toolbar, R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close)
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
 
@@ -75,7 +76,8 @@ class IssueStatusActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         personNameTV?.text = personName
         personEmailTV?.text = personEmail
 
-        val viewModel: IssueViewModel by lazy { ViewModelProviders.of(this).get(IssueViewModel::class.java) }
+        val viewModel: IssueViewModel by lazy { ViewModelProviders.of(this)
+                .get(IssueViewModel::class.java) }
 
         val liveData: LiveData<DataSnapshot?> = viewModel.getDataSnapshotLiveData()
 
@@ -89,7 +91,8 @@ class IssueStatusActivity : AppCompatActivity(), NavigationView.OnNavigationItem
                     }
                 }
             }
-            if (issueList?.size != 0) updateWidget(issueList?.get(issueList!!.size - 1)?.issueStatus)
+            if (issueList?.size != 0) updateWidget(issueList
+                    ?.get(issueList!!.size - 1)?.issueStatus)
             val recyclerView = findViewById<View?>(R.id.rvIssueStatus) as RecyclerView
             recyclerView.layoutManager = LinearLayoutManager(applicationContext)
             adapterIssueStatus = IssueStatusRecyclerViewAdapter(applicationContext, issueList)

@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.ajce.hostelmate.R
+import com.ajce.hostelmate.Utils
 import com.ajce.hostelmate.reportissue.IssueStatusActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -25,6 +26,10 @@ class InmatesLoginActivity : AppCompatActivity() {
     var PERSON_EMAIL: String? = "PERSON_EMAIL"
     var PROFILE_PIC: String? = "PROFILE_PIC"
     var FIRST_TIME_CHECK: String? = "FIRST_TIME_CHECK"
+
+    var INMATE: String = "inmate"
+    var RECEPTIONIST: String = "receptionist"
+
     lateinit var sharedPreferences: SharedPreferences
     lateinit var editor: SharedPreferences.Editor
     //var signInButton: SignInButton? = null
@@ -36,9 +41,25 @@ class InmatesLoginActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
+//        var utils = Utils()
+
+        swapUserMode.setOnClickListener {
+            val intent = Intent(applicationContext, ReceptionLoginActivity::class.java)
+            startActivity(intent)
+/*            if (INMATE.equals(utils.currentUserMode)){
+                utils.currentUserMode = RECEPTIONIST
+                val intent = Intent(applicationContext, ReceptionLoginActivity::class.java)
+                startActivity(intent)
+            } else {
+                utils.currentUserMode = INMATE
+                val intent = Intent(applicationContext, InmatesLoginActivity::class.java)
+                startActivity(intent)
+            }*/
+        }
+
         mAuth = FirebaseAuth.getInstance()
 
-        signInProgress.setVisibility(View.INVISIBLE)
+        signInProgress.visibility = View.INVISIBLE
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()

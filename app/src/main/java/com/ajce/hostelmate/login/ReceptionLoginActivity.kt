@@ -27,6 +27,11 @@ class ReceptionLoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_reception_login)
         supportActionBar?.hide()
 
+        swapUserMode.setOnClickListener {
+            val intent = Intent(applicationContext, InmatesLoginActivity::class.java)
+            startActivity(intent)
+        }
+
         databaseIssue = FirebaseDatabase.getInstance().getReference("admin_login")
         databaseIssue?.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
