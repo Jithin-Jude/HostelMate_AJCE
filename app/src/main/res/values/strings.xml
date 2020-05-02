@@ -118,4 +118,5 @@
     <string name="night_study">Night Study</string>
     <string name="notice_board">Notice Board</string>
     <string name="request_feedback">Request Feedback</string>
+    <string name="report_issue">Report Issue</string>
 </resources>

@@ -46,6 +46,8 @@ class ReportAnIssueActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_report_an_issue)
 
+        title = getString(R.string.report_issue)
+
         //actionbar
         val actionbar = supportActionBar
         //set back button
@@ -87,6 +89,7 @@ class ReportAnIssueActivity : AppCompatActivity() {
         databaseIssue?.child(id!!)?.setValue(issue)
         Toast.makeText(this, "Issue added", Toast.LENGTH_LONG).show()
         updateWidget(title)
+        finish()
     }
 
     fun takePhoto(view: View?) {
