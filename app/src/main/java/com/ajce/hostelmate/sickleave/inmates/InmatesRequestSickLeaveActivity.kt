@@ -52,6 +52,10 @@ class InmatesRequestSickLeaveActivity : AppCompatActivity() {
                 R.array.room_list, android.R.layout.simple_spinner_item)
         adapterSpinnerRoom.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spRoom.adapter = adapterSpinnerRoom
+
+        btnConfirm.setOnClickListener {
+            addSickLeave()
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -59,7 +63,7 @@ class InmatesRequestSickLeaveActivity : AppCompatActivity() {
         return true
     }
 
-    fun addSickLeave(view: View?) {
+    fun addSickLeave() {
 /*        if (sickLeaveReasonForRejection == null) {
             Toast.makeText(this, "Take photo of Issue", Toast.LENGTH_LONG).show()
             return
@@ -73,6 +77,12 @@ class InmatesRequestSickLeaveActivity : AppCompatActivity() {
         val date = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date())
         val status = "pending"
         sickLeaveReasonForRejection = ""
+
+        if ("" == title || "" == description) {
+            Toast.makeText(this, "Form fields cannot be empty", Toast.LENGTH_LONG).show()
+            return
+        }
+
         val issue = SickLeave(id, title, block, room, description, reportedBy, date, status, sickLeaveReasonForRejection)
         databaseReference?.child(id!!)?.setValue(issue)
         Toast.makeText(this, "Sick leave requested", Toast.LENGTH_LONG).show()

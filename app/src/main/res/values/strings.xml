@@ -119,5 +119,9 @@
     <string name="notice_board">Notice Board</string>
     <string name="request_feedback">Request Feedback</string>
     <string name="report_issue">Report Issue</string>
-    <string name="request_sickleave">Request sick leave</string>
+    <string name="request_sickleave">Request Sick Leave</string>
+    <string name="write_description_here">Write description here</string>
+    <string name="description">Description</string>
+    <string name="sick_leave_reason">Sick leave reason</string>
+    <string name="write_reason_here">Write reason here</string>
 </resources>
