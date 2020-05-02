@@ -29,7 +29,7 @@
         app:menu="@menu/inmates_bottom_navigation" />
 
     <ProgressBar
-        android:id="@+id/pbLoadingIssues"
+        android:id="@+id/pbLoading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:indeterminateTint="@color/colorPrimary"

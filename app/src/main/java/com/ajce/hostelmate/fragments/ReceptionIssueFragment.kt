@@ -36,7 +36,7 @@ class ReceptionIssueFragment : Fragment() {
 
         activity!!.title = getString(R.string.reported_issues)
 
-        activity!!.pbLoadingIssues.visibility = View.VISIBLE
+        activity!!.pbLoading.visibility = View.VISIBLE
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
         editor = sharedPreferences.edit()
 
@@ -59,7 +59,7 @@ class ReceptionIssueFragment : Fragment() {
             issueList?.reverse()
             adapterStatus = ReceptionIssueStatusRecyclerViewAdapter(context, issueList)
             rvReportedIssues.adapter = adapterStatus
-            activity!!.pbLoadingIssues.visibility = View.GONE
+            activity!!.pbLoading.visibility = View.GONE
         })
     }
 }

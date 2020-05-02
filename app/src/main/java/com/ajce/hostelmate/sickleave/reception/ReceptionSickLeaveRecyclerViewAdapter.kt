@@ -1,50 +1,49 @@
-package com.ajce.hostelmate.reportissue.reception
+package com.ajce.hostelmate.sickleave.reception
 
 import android.content.Context
 import android.content.Intent
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.recyclerview.widget.RecyclerView
 import com.ajce.hostelmate.R
-import com.ajce.hostelmate.reportissue.Issue
-import com.bumptech.glide.Glide
+import com.ajce.hostelmate.sickleave.SickLeave
 
 /**
- * Created by JithinJude on 15-03-2018.
+ * Created by JithinJude on 02,May,2020
  */
-class ReceptionIssueStatusRecyclerViewAdapter
+class ReceptionSickLeaveRecyclerViewAdapter
 internal constructor(var context: Context?,
-                     issueList: MutableList<Issue?>?) :
-        RecyclerView.Adapter<ReceptionIssueStatusRecyclerViewAdapter
+                     issueList: MutableList<SickLeave?>?) :
+        RecyclerView.Adapter<ReceptionSickLeaveRecyclerViewAdapter
         .ReceptionIssueStatusRecyclerViewHolder?>() {
 
-    val SELECTED_ISSUE: String = "selected_issue"
+    val SELECTED_SICK_LEAVE: String = "selected_sickleave"
     val SELECTED_POSITION: String = "selected_position"
 
-    private val issueList: MutableList<Issue?>?
+    private val issueList: MutableList<SickLeave?>?
     private val mInflater: LayoutInflater?
 
     // inflates the row layout from xml when needed
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int):
-            ReceptionIssueStatusRecyclerViewAdapter.ReceptionIssueStatusRecyclerViewHolder {
-        val view = mInflater?.inflate(R.layout.recyclerview_row, parent, false)
+            ReceptionSickLeaveRecyclerViewAdapter.ReceptionIssueStatusRecyclerViewHolder {
+        val view = mInflater?.inflate(R.layout.recyclerview_item_sickleave_inmate, parent, false)
         return ReceptionIssueStatusRecyclerViewHolder(view)
     }
 
     // binds the data to the TextView in each row
     override fun onBindViewHolder(holderStatus:
-                                  ReceptionIssueStatusRecyclerViewAdapter
+                                  ReceptionSickLeaveRecyclerViewAdapter
                                   .ReceptionIssueStatusRecyclerViewHolder, pos: Int) {
-        holderStatus.title.text = issueList?.get(pos)?.issueTitle
-        val issueLocation = issueList?.get(pos)?.issueBlock + ", " + issueList?.get(pos)?.issueRoom
+        holderStatus.title.text = issueList?.get(pos)?.sickLeaveTitle
+        holderStatus.name.text = issueList?.get(pos)?.sickLeaveReportedBy
+        val issueLocation = issueList?.get(pos)?.sickLeaveBlock + ", " + issueList?.get(pos)?.sickLeaveRoom
         holderStatus.blockAndRoom.text = issueLocation
-        holderStatus.date.text = issueList?.get(pos)?.issueDate
-        holderStatus.issueStatus.text = issueList?.get(pos)?.issueStatus
-        if (issueList?.get(pos)?.issueStatus == "Fixed") {
+        holderStatus.date.text = issueList?.get(pos)?.sickLeaveDate
+        holderStatus.issueStatus.text = issueList?.get(pos)?.sickLeaveStatus
+        if (issueList?.get(pos)?.sickLeaveStatus == "approved") {
             context?.resources?.getColor(R.color.green)?.let { holderStatus.issueStatus
                     .setTextColor(it) }
         } else {
@@ -52,16 +51,15 @@ internal constructor(var context: Context?,
                     .setTextColor(it) }
         }
 
-        Glide.with(context!!)
+/*        Glide.with(context!!)
                 .load(issueList?.get(pos)?.issueImageUrl)
-                .into(holderStatus.imageView)
+                .into(holderStatus.imageView)*/
 
         holderStatus.item?.setOnClickListener {
-            val intent = Intent(context, ReceptionIssuesDetailsActivity::class.java)
-            intent.putExtra(SELECTED_ISSUE, issueList?.get(pos))
+/*            val intent = Intent(context, ReceptionIssuesDetailsActivity::class.java)
+            intent.putExtra(SELECTED_SICK_LEAVE, issueList?.get(pos))
             intent.putExtra(SELECTED_POSITION,pos)
-            context!!.startActivity(intent)
-
+            context!!.startActivity(intent)*/
         }
     }
 
@@ -80,20 +78,20 @@ internal constructor(var context: Context?,
             RecyclerView.ViewHolder(itemView!!) {
         var item: CardView?
         var title: TextView
+        var name: TextView
         var date: TextView
         var blockAndRoom: TextView
         var issueStatus: TextView
-        var imageView: ImageView
         var context: Context?
 
         init {
             context = itemView?.context
             item = itemView?.findViewById(R.id.itemCardView)
             title = itemView?.findViewById(R.id.tvTitle)!!
+            name = itemView.findViewById(R.id.tvName)
             date = itemView.findViewById(R.id.tvDate)
             blockAndRoom = itemView.findViewById(R.id.tvBlockAndRoom)
             issueStatus = itemView.findViewById(R.id.tvStatus)
-            imageView = itemView.findViewById(R.id.ivIssueImage)
         }
     }
 }
