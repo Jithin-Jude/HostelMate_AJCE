@@ -51,15 +51,11 @@ internal constructor(var context: Context?,
                     .setTextColor(it) }
         }
 
-/*        Glide.with(context!!)
-                .load(issueList?.get(pos)?.issueImageUrl)
-                .into(holderStatus.imageView)*/
-
         holderStatus.item?.setOnClickListener {
-/*            val intent = Intent(context, ReceptionIssuesDetailsActivity::class.java)
+            val intent = Intent(context, ReceptionSickLeaveDetailsActivity::class.java)
             intent.putExtra(SELECTED_SICK_LEAVE, issueList?.get(pos))
-            intent.putExtra(SELECTED_POSITION,pos)
-            context!!.startActivity(intent)*/
+            intent.putExtra(SELECTED_POSITION, pos)
+            context!!.startActivity(intent)
         }
     }
 
