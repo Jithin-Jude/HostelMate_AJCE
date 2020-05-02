@@ -1,55 +1,52 @@
-package com.ajce.hostelmate.reportissue
+package com.ajce.hostelmate.reportissue.reception
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import androidx.recyclerview.widget.RecyclerView
-import android.util.Base64
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.ajce.hostelmate.R
+import com.ajce.hostelmate.reportissue.Issue
 import com.bumptech.glide.Glide
 
 /**
  * Created by JithinJude on 15-03-2018.
  */
-class ReceptionIssueRecyclerViewAdapter
+class ReceptionIssueStatusRecyclerViewAdapter
 internal constructor(var context: Context?,
-                     issueList: MutableList<Issue?>?) : RecyclerView.Adapter<ReceptionIssueRecyclerViewHolder?>() {
+                     issueList: MutableList<Issue?>?) : RecyclerView.Adapter<ReceptionIssueStatusRecyclerViewHolder?>() {
 
     val SELECTED_ISSUE: String = "selected_issue"
     val SELECTED_POSITION: String = "selected_position"
 
     private val issueList: MutableList<Issue?>?
     private val mInflater: LayoutInflater?
-    private val mClickListenerIssueStatus: IssueStatusRecyclerViewClickListener? = null
 
     // inflates the row layout from xml when needed
-    override fun onCreateViewHolder(parent: ViewGroup, p1: Int): ReceptionIssueRecyclerViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, p1: Int): ReceptionIssueStatusRecyclerViewHolder {
         val view = mInflater?.inflate(R.layout.recyclerview_row, parent, false)
-        return ReceptionIssueRecyclerViewHolder(view)
+        return ReceptionIssueStatusRecyclerViewHolder(view)
     }
 
     // binds the data to the TextView in each row
-    override fun onBindViewHolder(holder: ReceptionIssueRecyclerViewHolder, pos: Int) {
-        holder.title.text = issueList?.get(pos)?.issueTitle
+    override fun onBindViewHolder(holderStatus: ReceptionIssueStatusRecyclerViewHolder, pos: Int) {
+        holderStatus.title.text = issueList?.get(pos)?.issueTitle
         val issueLocation = issueList?.get(pos)?.issueBlock + ", " + issueList?.get(pos)?.issueRoom
-        holder.blockAndRoom.text = issueLocation
-        holder.date.text = issueList?.get(pos)?.issueDate
-        holder.issueStatus.text = issueList?.get(pos)?.issueStatus
+        holderStatus.blockAndRoom.text = issueLocation
+        holderStatus.date.text = issueList?.get(pos)?.issueDate
+        holderStatus.issueStatus.text = issueList?.get(pos)?.issueStatus
         if (issueList?.get(pos)?.issueStatus == "Fixed") {
-            context?.resources?.getColor(R.color.green)?.let { holder.issueStatus.setTextColor(it) }
+            context?.resources?.getColor(R.color.green)?.let { holderStatus.issueStatus.setTextColor(it) }
         } else {
-            context?.resources?.getColor(R.color.red)?.let { holder.issueStatus.setTextColor(it) }
+            context?.resources?.getColor(R.color.red)?.let { holderStatus.issueStatus.setTextColor(it) }
         }
 
         Glide.with(context!!)
                 .load(issueList?.get(pos)?.issueImageUrl)
-                .into(holder.imageView)
+                .into(holderStatus.imageView)
 
-        holder.item?.setOnClickListener {
-            val intent = Intent(context, ReportedIssuesDetailsForReceptionActivity::class.java)
+        holderStatus.item?.setOnClickListener {
+            val intent = Intent(context, ReceptionIssuesDetailsActivity::class.java)
             intent.putExtra(SELECTED_ISSUE, issueList?.get(pos))
             intent.putExtra(SELECTED_POSITION,pos)
             context!!.startActivity(intent)

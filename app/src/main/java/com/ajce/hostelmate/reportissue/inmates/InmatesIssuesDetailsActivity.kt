@@ -1,12 +1,13 @@
-package com.ajce.hostelmate.reportissue
+package com.ajce.hostelmate.reportissue.inmates
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.ajce.hostelmate.R
+import com.ajce.hostelmate.reportissue.Issue
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_reported_issues_details_for_inmates.*
 
-class ReportedIssuesDetailsForInmatesActivity : AppCompatActivity() {
+class InmatesIssuesDetailsActivity : AppCompatActivity() {
 
     val SELECTED_ISSUE: String = "selected_issue"
     val SELECTED_POSITION: String = "selected_position"

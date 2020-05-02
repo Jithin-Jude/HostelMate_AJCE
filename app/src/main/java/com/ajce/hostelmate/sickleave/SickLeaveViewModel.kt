@@ -1,4 +1,4 @@
-package com.ajce.hostelmate.reportissue
+package com.ajce.hostelmate.sickleave
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
@@ -6,14 +6,13 @@ import com.ajce.hostelmate.FirebaseQueryLiveData
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.FirebaseDatabase
 
-
 /**
- * Created by JithinJude on 26,April,2020
+ * Created by JithinJude on 02,May,2020
  */
-class IssueViewModel : ViewModel() {
-    private val ISSUES_REF = FirebaseDatabase.getInstance().getReference("issues")
+class SickLeaveViewModel : ViewModel() {
+    private val SICK_LEAVE_REF = FirebaseDatabase.getInstance().getReference("sickleave")
 
-    private val liveData = FirebaseQueryLiveData(ISSUES_REF)
+    private val liveData = FirebaseQueryLiveData(SICK_LEAVE_REF)
 
     fun getDataSnapshotLiveData(): LiveData<DataSnapshot?> {
         return liveData

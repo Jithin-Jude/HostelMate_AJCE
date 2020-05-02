@@ -1,4 +1,4 @@
-package com.ajce.hostelmate.reportissue
+package com.ajce.hostelmate.reportissue.inmates
 
 import android.content.Context
 import androidx.recyclerview.widget.RecyclerView
@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.cardview.widget.CardView
 import com.ajce.hostelmate.R
 
-class IssueStatusRecyclerViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
+class InmatesIssueStatusRecyclerViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
     var item: CardView?
     var title: TextView?
     var date: TextView?

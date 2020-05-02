@@ -1,25 +1,18 @@
-package com.ajce.hostelmate.reportissue
+package com.ajce.hostelmate.reportissue.reception
 
 import android.content.ComponentName
 import android.content.Intent
-import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.preference.PreferenceManager
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModelProviders
 import com.ajce.hostelmate.ControlPanelActivity
 import com.ajce.hostelmate.R
 import com.ajce.hostelmate.WidgetForInmates
 import com.ajce.hostelmate.fragments.*
+import com.ajce.hostelmate.reportissue.Issue
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_reception_dashboard.*
 import java.util.*
 

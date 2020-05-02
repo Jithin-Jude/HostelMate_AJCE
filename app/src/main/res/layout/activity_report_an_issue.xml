@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorAccent"
     android:padding="8dp"
-    tools:context=".reportissue.ReportAnIssueActivity">
+    tools:context=".reportissue.inmates.InmatesReportAnIssueActivity">
 
 
     <ImageView

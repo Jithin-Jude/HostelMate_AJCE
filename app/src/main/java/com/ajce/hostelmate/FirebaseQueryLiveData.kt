@@ -1,4 +1,4 @@
-package com.ajce.hostelmate.reportissue
+package com.ajce.hostelmate
 
 import android.util.Log
 import androidx.lifecycle.LiveData

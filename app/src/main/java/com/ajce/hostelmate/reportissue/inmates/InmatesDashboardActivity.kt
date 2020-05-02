@@ -1,4 +1,4 @@
-package com.ajce.hostelmate.reportissue
+package com.ajce.hostelmate.reportissue.inmates
 
 import android.content.Intent
 import android.os.Bundle

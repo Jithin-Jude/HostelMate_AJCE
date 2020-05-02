@@ -20,13 +20,13 @@
         <activity android:name="com.ajce.hostelmate.login.InmatesLoginActivity" />
         <activity android:name="com.ajce.hostelmate.login.ReceptionLoginActivity" />
         <activity
-            android:name="com.ajce.hostelmate.reportissue.InmatesDashboardActivity"
+            android:name="com.ajce.hostelmate.reportissue.inmates.InmatesDashboardActivity"
             android:label="@string/title_activity_issue_status"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name="com.ajce.hostelmate.reportissue.ReportedIssuesDetailsForInmatesActivity" />
-        <activity android:name="com.ajce.hostelmate.reportissue.ReportAnIssueActivity" />
-        <activity android:name="com.ajce.hostelmate.reportissue.ReceptionDashboardActivity" />
-        <activity android:name="com.ajce.hostelmate.reportissue.ReportedIssuesDetailsForReceptionActivity" />
+        <activity android:name="com.ajce.hostelmate.reportissue.inmates.InmatesIssuesDetailsActivity" />
+        <activity android:name="com.ajce.hostelmate.reportissue.inmates.InmatesReportAnIssueActivity" />
+        <activity android:name="com.ajce.hostelmate.reportissue.reception.ReceptionDashboardActivity" />
+        <activity android:name="com.ajce.hostelmate.reportissue.reception.ReceptionIssuesDetailsActivity" />
         <activity
             android:name="com.ajce.hostelmate.SplashScreenActivity"
             android:theme="@style/SplashTheme">

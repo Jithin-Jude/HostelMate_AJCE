@@ -15,7 +15,7 @@ import androidx.core.app.NotificationManagerCompat
 import android.widget.Toast
 import com.ajce.hostelmate.login.ReceptionLoginActivity
 import com.ajce.hostelmate.reportissue.Issue
-import com.ajce.hostelmate.reportissue.ReceptionDashboardActivity
+import com.ajce.hostelmate.reportissue.reception.ReceptionDashboardActivity
 import com.google.firebase.database.*
 import java.util.*
 

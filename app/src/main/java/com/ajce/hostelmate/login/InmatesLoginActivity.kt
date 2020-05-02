@@ -10,7 +10,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.ajce.hostelmate.R
-import com.ajce.hostelmate.reportissue.InmatesDashboardActivity
+import com.ajce.hostelmate.reportissue.inmates.InmatesDashboardActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient

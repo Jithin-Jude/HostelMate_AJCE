@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RemoteViews
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProviders
@@ -16,6 +15,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ajce.hostelmate.R
 import com.ajce.hostelmate.WidgetForInmates
 import com.ajce.hostelmate.reportissue.*
+import com.ajce.hostelmate.reportissue.inmates.InmatesIssueStatusRecyclerViewAdapter
+import com.ajce.hostelmate.reportissue.inmates.InmatesReportAnIssueActivity
 import com.google.firebase.database.DataSnapshot
 import kotlinx.android.synthetic.main.content_issue_status.*
 import kotlinx.android.synthetic.main.fragment_issue_status.*
@@ -28,7 +29,7 @@ class IssueFragment : Fragment() {
 
     var issueList: MutableList<Issue?>? = ArrayList()
 
-    lateinit var adapterIssueStatus: IssueStatusRecyclerViewAdapter
+    lateinit var adapterInmatesIssueStatus: InmatesIssueStatusRecyclerViewAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
             inflater.inflate(R.layout.fragment_issue_status, container, false)
@@ -39,7 +40,7 @@ class IssueFragment : Fragment() {
 
         activity?.loadingIssuesForInmates?.visibility = View.VISIBLE
         fab.setOnClickListener {
-            val intent = Intent(context, ReportAnIssueActivity::class.java)
+            val intent = Intent(context, InmatesReportAnIssueActivity::class.java)
             intent.putExtra(USER_EMAIL, personEmail)
             startActivity(intent)
         }
@@ -64,8 +65,8 @@ class IssueFragment : Fragment() {
 
             rvIssueStatus.layoutManager = LinearLayoutManager(context)
             issueList?.reverse()
-            adapterIssueStatus = IssueStatusRecyclerViewAdapter(context, issueList)
-            rvIssueStatus.adapter = adapterIssueStatus
+            adapterInmatesIssueStatus = InmatesIssueStatusRecyclerViewAdapter(context, issueList)
+            rvIssueStatus.adapter = adapterInmatesIssueStatus
             activity?.loadingIssuesForInmates?.visibility = View.GONE
         })
     }

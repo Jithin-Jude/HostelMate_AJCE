@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
 import com.ajce.hostelmate.R
-import com.ajce.hostelmate.reportissue.ReceptionDashboardActivity
+import com.ajce.hostelmate.reportissue.reception.ReceptionDashboardActivity
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_reception_login.*
 import java.util.*

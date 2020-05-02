@@ -1,4 +1,4 @@
-package com.ajce.hostelmate.reportissue
+package com.ajce.hostelmate.reportissue.inmates
 
 import android.app.Activity
 import android.app.PendingIntent
@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.ajce.hostelmate.R
 import com.ajce.hostelmate.WidgetForInmates
 import com.ajce.hostelmate.login.InmatesLoginActivity
+import com.ajce.hostelmate.reportissue.Issue
 import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.Task
 import com.google.firebase.database.DatabaseReference
@@ -30,7 +31,7 @@ import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
 
-class ReportAnIssueActivity : AppCompatActivity() {
+class InmatesReportAnIssueActivity : AppCompatActivity() {
 
     val USER_EMAIL: String = "user_email"
 

@@ -10,14 +10,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.ajce.hostelmate.R
 import com.ajce.hostelmate.reportissue.Issue
 import com.ajce.hostelmate.reportissue.IssueViewModel
-import com.ajce.hostelmate.reportissue.ReceptionDashboardActivity
-import com.ajce.hostelmate.reportissue.ReceptionIssueRecyclerViewAdapter
+import com.ajce.hostelmate.reportissue.reception.ReceptionIssueStatusRecyclerViewAdapter
 import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseReference
 import kotlinx.android.synthetic.main.activity_reception_dashboard.*
 import kotlinx.android.synthetic.main.fragment_issue_reception.*
 
@@ -28,7 +25,7 @@ class ReceptionIssueFragment : Fragment() {
     
     var issueList: MutableList<Issue?>? = ArrayList()
 
-    lateinit var adapter: ReceptionIssueRecyclerViewAdapter
+    lateinit var adapterStatus: ReceptionIssueStatusRecyclerViewAdapter
     lateinit var sharedPreferences: SharedPreferences
     lateinit var editor: SharedPreferences.Editor
 
@@ -60,8 +57,8 @@ class ReceptionIssueFragment : Fragment() {
 
             rvReportedIssues.layoutManager = LinearLayoutManager(context)
             issueList?.reverse()
-            adapter = ReceptionIssueRecyclerViewAdapter(context, issueList)
-            rvReportedIssues.adapter = adapter
+            adapterStatus = ReceptionIssueStatusRecyclerViewAdapter(context, issueList)
+            rvReportedIssues.adapter = adapterStatus
             activity!!.pbLoadingIssues.visibility = View.GONE
         })
     }

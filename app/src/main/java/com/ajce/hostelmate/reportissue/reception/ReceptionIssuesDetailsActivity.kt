@@ -1,17 +1,15 @@
-package com.ajce.hostelmate.reportissue
+package com.ajce.hostelmate.reportissue.reception
 
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import android.util.Base64
 import android.view.View
 import com.ajce.hostelmate.R
+import com.ajce.hostelmate.reportissue.Issue
 import com.bumptech.glide.Glide
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_reported_issues_details_for_reception.*
 
-class ReportedIssuesDetailsForReceptionActivity : AppCompatActivity() {
+class ReceptionIssuesDetailsActivity : AppCompatActivity() {
 
     val SELECTED_ISSUE: String = "selected_issue"
     val SELECTED_POSITION: String = "selected_position"

@@ -1,4 +1,4 @@
-package com.ajce.hostelmate.reportissue
+package com.ajce.hostelmate.reportissue.reception
 
 import android.content.Context
 import android.content.Intent
@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import com.ajce.hostelmate.R
 
-class ReceptionIssueRecyclerViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
+class ReceptionIssueStatusRecyclerViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
     var item: CardView?
     var title: TextView
     var date: TextView
