@@ -52,10 +52,10 @@ class InmatesSickLeaveRecyclerViewAdapter(var context: Context?,
                 .into(holderInmatesSickLeave.imageView!!)*/
 
         holderInmatesSickLeave.item?.setOnClickListener {
-/*            val intent = Intent(context, InmatesSickLeavesDetailsActivity::class.java)
+            val intent = Intent(context, InmatesSickLeavesDetailsActivity::class.java)
             intent.putExtra(SELECTED_SICK_LEAVE, sickLeaveList?.get(pos))
             intent.putExtra(SELECTED_POSITION,pos)
-            context!!.startActivity(intent)*/
+            context!!.startActivity(intent)
 
         }
     }

@@ -30,6 +30,7 @@
 
 
         <activity android:name="com.ajce.hostelmate.sickleave.inmates.InmatesRequestSickLeaveActivity" />
+        <activity android:name="com.ajce.hostelmate.sickleave.inmates.InmatesSickLeavesDetailsActivity" />
         <activity
             android:name="com.ajce.hostelmate.activities.SplashScreenActivity"
             android:theme="@style/SplashTheme">
