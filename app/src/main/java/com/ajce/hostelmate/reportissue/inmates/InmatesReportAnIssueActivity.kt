@@ -17,7 +17,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.ajce.hostelmate.R
 import com.ajce.hostelmate.WidgetForInmates
-import com.ajce.hostelmate.login.InmatesLoginActivity
+import com.ajce.hostelmate.activities.InmatesLoginActivity
 import com.ajce.hostelmate.reportissue.Issue
 import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.Task

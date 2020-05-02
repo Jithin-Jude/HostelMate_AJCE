@@ -17,18 +17,21 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name="com.ajce.hostelmate.login.InmatesLoginActivity" />
-        <activity android:name="com.ajce.hostelmate.login.ReceptionLoginActivity" />
+        <activity android:name="com.ajce.hostelmate.activities.InmatesLoginActivity" />
+        <activity android:name="com.ajce.hostelmate.activities.ReceptionLoginActivity" />
         <activity
-            android:name="com.ajce.hostelmate.reportissue.inmates.InmatesDashboardActivity"
+            android:name="com.ajce.hostelmate.activities.InmatesDashboardActivity"
             android:label="@string/title_activity_issue_status"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name="com.ajce.hostelmate.reportissue.inmates.InmatesIssuesDetailsActivity" />
         <activity android:name="com.ajce.hostelmate.reportissue.inmates.InmatesReportAnIssueActivity" />
-        <activity android:name="com.ajce.hostelmate.reportissue.reception.ReceptionDashboardActivity" />
+        <activity android:name="com.ajce.hostelmate.activities.ReceptionDashboardActivity" />
         <activity android:name="com.ajce.hostelmate.reportissue.reception.ReceptionIssuesDetailsActivity" />
+
+
+        <activity android:name="com.ajce.hostelmate.sickleave.inmates.InmatesRequestSickLeaveActivity" />
         <activity
-            android:name="com.ajce.hostelmate.SplashScreenActivity"
+            android:name="com.ajce.hostelmate.activities.SplashScreenActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -41,7 +44,7 @@
             android:name="com.ajce.hostelmate.NotificationService"
             android:exported="false" />
 
-        <activity android:name="com.ajce.hostelmate.ControlPanelActivity" />
+        <activity android:name="com.ajce.hostelmate.activities.ControlPanelActivity" />
 
         <receiver android:name="com.ajce.hostelmate.WidgetForInmates">
             <intent-filter>

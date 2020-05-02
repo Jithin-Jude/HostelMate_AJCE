@@ -1,4 +1,4 @@
-package com.ajce.hostelmate
+package com.ajce.hostelmate.activities
 
 import android.content.Intent
 import android.content.SharedPreferences
@@ -12,8 +12,9 @@ import android.view.View
 import android.widget.CompoundButton
 import android.widget.EditText
 import android.widget.Toast
+import com.ajce.hostelmate.NotificationService
+import com.ajce.hostelmate.R
 import com.ajce.hostelmate.login.AdminLogin
-import com.ajce.hostelmate.login.ReceptionLoginActivity
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_control_panel.*
 import java.util.*

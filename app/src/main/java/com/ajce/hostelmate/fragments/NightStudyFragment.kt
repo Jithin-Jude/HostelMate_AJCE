@@ -15,5 +15,7 @@ class NightStudyFragment : Fragment() {
             inflater.inflate(R.layout.fragment_night_study, container, false)
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        activity?.title = getString(R.string.night_study)
     }
 }

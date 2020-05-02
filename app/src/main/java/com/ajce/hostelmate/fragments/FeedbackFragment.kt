@@ -15,5 +15,7 @@ class FeedbackFragment : Fragment() {
             inflater.inflate(R.layout.fragment_feedback, container, false)
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        activity?.title = getString(R.string.request_feedback)
     }
 }

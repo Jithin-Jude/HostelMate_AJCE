@@ -1,4 +1,4 @@
-package com.ajce.hostelmate.login
+package com.ajce.hostelmate.activities
 
 import android.content.Intent
 import android.content.SharedPreferences
@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
 import com.ajce.hostelmate.R
-import com.ajce.hostelmate.reportissue.reception.ReceptionDashboardActivity
+import com.ajce.hostelmate.login.AdminLogin
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_reception_login.*
 import java.util.*

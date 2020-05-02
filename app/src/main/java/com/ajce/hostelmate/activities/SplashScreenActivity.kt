@@ -1,4 +1,4 @@
-package com.ajce.hostelmate
+package com.ajce.hostelmate.activities
 
 import android.content.Context
 import android.content.Intent
@@ -8,8 +8,7 @@ import android.os.AsyncTask
 import android.os.Bundle
 import android.preference.PreferenceManager
 import androidx.appcompat.app.AppCompatActivity
-import com.ajce.hostelmate.login.InmatesLoginActivity
-import com.ajce.hostelmate.login.ReceptionLoginActivity
+import com.ajce.hostelmate.NoNetwork
 
 class SplashScreenActivity : AppCompatActivity() {
     lateinit var sharedPreferences: SharedPreferences

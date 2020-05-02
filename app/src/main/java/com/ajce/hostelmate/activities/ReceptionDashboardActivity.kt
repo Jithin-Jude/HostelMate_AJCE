@@ -1,4 +1,4 @@
-package com.ajce.hostelmate.reportissue.reception
+package com.ajce.hostelmate.activities
 
 import android.content.ComponentName
 import android.content.Intent
@@ -7,7 +7,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import com.ajce.hostelmate.ControlPanelActivity
 import com.ajce.hostelmate.R
 import com.ajce.hostelmate.WidgetForInmates
 import com.ajce.hostelmate.fragments.*

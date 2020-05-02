@@ -15,5 +15,7 @@ class NoticeBoardFragment : Fragment() {
             inflater.inflate(R.layout.fragment_notice_board, container, false)
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        activity?.title = getString(R.string.notice_board)
     }
 }

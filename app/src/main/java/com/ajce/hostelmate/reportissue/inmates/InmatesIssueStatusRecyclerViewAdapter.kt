@@ -16,7 +16,10 @@ import com.bumptech.glide.Glide
 /**
  * Created by JithinJude on 15-03-2018.
  */
-class InmatesIssueStatusRecyclerViewAdapter(var context: Context?, issueList: MutableList<Issue?>?) : RecyclerView.Adapter<InmatesIssueStatusRecyclerViewAdapter.InmatesIssueStatusRecyclerViewHolder?>() {
+class InmatesIssueStatusRecyclerViewAdapter(var context: Context?,
+                                            issueList: MutableList<Issue?>?) :
+        RecyclerView.Adapter<InmatesIssueStatusRecyclerViewAdapter
+        .InmatesIssueStatusRecyclerViewHolder?>() {
     private val issueList: MutableList<Issue?>?
     private val mInflater: LayoutInflater?
 
@@ -24,22 +27,26 @@ class InmatesIssueStatusRecyclerViewAdapter(var context: Context?, issueList: Mu
     val SELECTED_POSITION: String = "selected_position"
 
     // inflates the row layout from xml when needed
-    override fun onCreateViewHolder(parent: ViewGroup, pos: Int): InmatesIssueStatusRecyclerViewAdapter.InmatesIssueStatusRecyclerViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, pos: Int):
+            InmatesIssueStatusRecyclerViewAdapter.InmatesIssueStatusRecyclerViewHolder {
         val view = mInflater?.inflate(R.layout.recyclerview_row, parent, false)
         return InmatesIssueStatusRecyclerViewHolder(view)
     }
 
     // binds the data to the TextView in each row
-    override fun onBindViewHolder(holderInmatesIssueStatus: InmatesIssueStatusRecyclerViewAdapter.InmatesIssueStatusRecyclerViewHolder, pos: Int) {
+    override fun onBindViewHolder(holderInmatesIssueStatus: InmatesIssueStatusRecyclerViewAdapter
+    .InmatesIssueStatusRecyclerViewHolder, pos: Int) {
         holderInmatesIssueStatus.title?.text = issueList?.get(pos)?.issueTitle
         val issueLocation = issueList?.get(pos)?.issueBlock + ", " + issueList?.get(pos)?.issueRoom
         holderInmatesIssueStatus.blockAndRoom?.text = issueLocation
         holderInmatesIssueStatus.date?.text = issueList?.get(pos)?.issueDate
         holderInmatesIssueStatus.issueStatus?.text = issueList?.get(pos)?.issueStatus
         if (issueList?.get(pos)?.issueStatus == "Fixed") {
-            holderInmatesIssueStatus.issueStatus?.setTextColor(context?.resources?.getColor(R.color.green)!!)
+            holderInmatesIssueStatus.issueStatus
+                    ?.setTextColor(context?.resources?.getColor(R.color.green)!!)
         } else {
-            holderInmatesIssueStatus.issueStatus?.setTextColor(context?.resources?.getColor(R.color.red)!!)
+            holderInmatesIssueStatus.issueStatus
+                    ?.setTextColor(context?.resources?.getColor(R.color.red)!!)
         }
 
         Glide.with(context!!)
@@ -67,7 +74,8 @@ class InmatesIssueStatusRecyclerViewAdapter(var context: Context?, issueList: Mu
         this.issueList = issueList
     }
 
-    inner class InmatesIssueStatusRecyclerViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
+    inner class InmatesIssueStatusRecyclerViewHolder(itemView: View?) :
+            RecyclerView.ViewHolder(itemView!!) {
         var item: CardView?
         var title: TextView?
         var date: TextView?

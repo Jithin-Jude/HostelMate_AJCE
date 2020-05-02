@@ -1,4 +1,4 @@
-package com.ajce.hostelmate.reportissue.inmates
+package com.ajce.hostelmate.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -14,7 +14,6 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.ajce.hostelmate.R
 import com.ajce.hostelmate.fragments.*
-import com.ajce.hostelmate.login.InmatesLoginActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.gms.tasks.OnCompleteListener
@@ -84,12 +83,20 @@ class InmatesDashboardActivity : AppCompatActivity(), NavigationView.OnNavigatio
                 }
                 R.id.bNavSickLeave -> {
                     val fragment = SickLeaveFragment()
+                    val bundle = Bundle().apply {
+                        putString(USER_EMAIL, personEmail)
+                    }
+                    fragment.arguments = bundle
                     supportFragmentManager.beginTransaction().replace(R.id.dashboardContainer, fragment, fragment.javaClass.simpleName)
                             .commit()
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.bNavNightStudy -> {
                     val fragment = NightStudyFragment()
+                    val bundle = Bundle().apply {
+                        putString(USER_EMAIL, personEmail)
+                    }
+                    fragment.arguments = bundle
                     supportFragmentManager.beginTransaction().replace(R.id.dashboardContainer, fragment, fragment.javaClass.simpleName)
                             .commit()
                     return@OnNavigationItemSelectedListener true
@@ -102,6 +109,10 @@ class InmatesDashboardActivity : AppCompatActivity(), NavigationView.OnNavigatio
                 }
                 R.id.bNavFeedback -> {
                     val fragment = FeedbackFragment()
+                    val bundle = Bundle().apply {
+                        putString(USER_EMAIL, personEmail)
+                    }
+                    fragment.arguments = bundle
                     supportFragmentManager.beginTransaction().replace(R.id.dashboardContainer, fragment, fragment.javaClass.getSimpleName())
                             .commit()
                     return@OnNavigationItemSelectedListener true
