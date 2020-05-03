@@ -28,6 +28,8 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:padding="8dp">
 
                 <TextView
@@ -88,7 +90,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
-                    android:text="Sick leave reported by:"
+                    android:text="@string/sick_leave_reported_by"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvDescription" />
@@ -102,6 +104,36 @@
                     android:text="@string/jithinkjose2020_cs_ajce_in"
                     app:layout_constraintStart_toEndOf="@+id/textView11"
                     app:layout_constraintTop_toTopOf="@+id/textView11" />
+
+                <TextView
+                    android:id="@+id/tvCommentsLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:text="@string/comments_reason_for_rejection"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="@+id/textView11"
+                    app:layout_constraintTop_toBottomOf="@+id/tvReportedBy" />
+
+                <EditText
+                    android:id="@+id/etComments"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:textSize="14sp"
+                    android:background="@drawable/edittext_bg"
+                    android:ems="10"
+                    android:gravity="top"
+                    android:hint="@string/if_rejected_without_comments_meet_in_person_instruction_will_be_pass_to_inmate"
+                    android:inputType="textMultiLine"
+                    android:textColor="#000000"
+                    android:textColorHint="@color/grey"
+                    android:padding="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvCommentsLabel"
+                    tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
     </androidx.cardview.widget.CardView>
@@ -124,7 +156,7 @@
             android:background="@drawable/round_corner_button_green"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
-            android:text="Approve"
+            android:text="@string/approve"
             android:textColor="#ffffff" />
 
         <Button
@@ -137,7 +169,7 @@
             android:background="@drawable/round_corner_button_red"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
-            android:text="Reject"
+            android:text="@string/reject"
             android:textColor="#ffffff" />
 
     </LinearLayout>
@@ -146,7 +178,6 @@
         android:id="@+id/tickMark"
         android:layout_width="78dp"
         android:layout_height="58dp"
-        android:contentDescription="@string/issue_fixed_tick_mark"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

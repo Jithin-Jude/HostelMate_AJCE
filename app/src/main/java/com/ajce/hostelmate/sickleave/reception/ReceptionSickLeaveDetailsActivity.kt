@@ -46,11 +46,15 @@ class ReceptionSickLeaveDetailsActivity : AppCompatActivity() {
                 btnRejectSickLeave.visibility = View.GONE
                 ivXXX.visibility = View.GONE
                 tickMark.visibility = View.VISIBLE
+                etComments.setText(sickLeave.sickLeaveReasonForRejection)
+                etComments.isFocusable = false
             } else {
                 btnApproveSickLeave.visibility = View.GONE
                 btnRejectSickLeave.visibility = View.GONE
                 tickMark.visibility = View.GONE
                 ivXXX.visibility = View.VISIBLE
+                etComments.setText(sickLeave.sickLeaveReasonForRejection)
+                etComments.isFocusable = false
             }
         }
 
@@ -81,7 +85,12 @@ class ReceptionSickLeaveDetailsActivity : AppCompatActivity() {
         val description: String? = sickLeave.sickLeaveReason
         val reportedBy: String? = sickLeave.sickLeaveReportedBy
         val date: String? = sickLeave.sickLeaveDate
-        val reasonForRejection: String? = sickLeave.sickLeaveReasonForRejection
+        val reasonForRejection: String?
+        if("" == etComments.text.toString()){
+            reasonForRejection = ""
+        } else {
+            reasonForRejection = etComments.text.toString()
+        }
         val sickLeave = SickLeave(id, title, block, room, description, reportedBy, date, status, reasonForRejection)
         databaseReference?.setValue(sickLeave)
         btnApproveSickLeave.visibility = View.GONE
@@ -103,7 +112,12 @@ class ReceptionSickLeaveDetailsActivity : AppCompatActivity() {
         val description: String? = sickLeave.sickLeaveReason
         val reportedBy: String? = sickLeave.sickLeaveReportedBy
         val date: String? = sickLeave.sickLeaveDate
-        val reasonForRejection: String? = sickLeave.sickLeaveReasonForRejection
+        val reasonForRejection: String?
+        if("" == etComments.text.toString()){
+            reasonForRejection = getString(R.string.report_in_person)
+        } else {
+            reasonForRejection = etComments.text.toString()
+        }
         val sickLeave = SickLeave(id, title, block, room, description, reportedBy, date, status, reasonForRejection)
         databaseReference?.setValue(sickLeave)
         btnApproveSickLeave.visibility = View.GONE

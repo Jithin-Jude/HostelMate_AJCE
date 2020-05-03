@@ -125,4 +125,11 @@
     <string name="sick_leave_reason">Sick leave reason</string>
     <string name="write_reason_here">Write reason here</string>
     <string name="sick_leave_description">Sick leave description:</string>
+    <string name="comments_reason_for_rejection">Comments/Reason for rejection:</string>
+    <string name="sick_leave_reported_by">Sick leave reported by:</string>
+    <string name="reject">Reject</string>
+    <string name="approve">Approve</string>
+    <string name="if_rejected_without_comments_meet_in_person_instruction_will_be_pass_to_inmate">If rejected without comments, Meet in person instruction will be pass to inmate</string>
+    <string name="report_in_person">Report in person at reception.</string>
+    <string name="comments">Comments:</string>
 </resources>
