@@ -80,7 +80,7 @@
         android:layout_marginTop="8dp"
         android:text="@string/sign_in"
         android:onClick="receptionLogin"
-        android:background="@drawable/round_corner_button"
+        android:background="@drawable/round_corner_button_white"
         android:textColor="@color/colorPrimaryDark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
