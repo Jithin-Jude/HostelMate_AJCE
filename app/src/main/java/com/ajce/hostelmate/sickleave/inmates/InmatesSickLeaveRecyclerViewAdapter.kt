@@ -42,9 +42,12 @@ class InmatesSickLeaveRecyclerViewAdapter(var context: Context?,
         if (sickLeaveList?.get(pos)?.sickLeaveStatus == "approved") {
             holderInmatesSickLeave.sickLeaveStatus
                     ?.setTextColor(context?.resources?.getColor(R.color.green)!!)
-        } else {
+        } else if (sickLeaveList?.get(pos)?.sickLeaveStatus == "rejected") {
             holderInmatesSickLeave.sickLeaveStatus
                     ?.setTextColor(context?.resources?.getColor(R.color.red)!!)
+        } else {
+            holderInmatesSickLeave.sickLeaveStatus
+                    ?.setTextColor(context?.resources?.getColor(R.color.dark_grey)!!)
         }
 
 /*        Glide.with(context!!)

@@ -16,44 +16,47 @@ import com.ajce.hostelmate.sickleave.SickLeave
  */
 class ReceptionSickLeaveRecyclerViewAdapter
 internal constructor(var context: Context?,
-                     issueList: MutableList<SickLeave?>?) :
+                     sickLeaveList: MutableList<SickLeave?>?) :
         RecyclerView.Adapter<ReceptionSickLeaveRecyclerViewAdapter
-        .ReceptionIssueStatusRecyclerViewHolder?>() {
+        .ReceptionsickLeaveStatusRecyclerViewHolder?>() {
 
     val SELECTED_SICK_LEAVE: String = "selected_sickleave"
     val SELECTED_POSITION: String = "selected_position"
 
-    private val issueList: MutableList<SickLeave?>?
+    private val sickLeaveList: MutableList<SickLeave?>?
     private val mInflater: LayoutInflater?
 
     // inflates the row layout from xml when needed
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int):
-            ReceptionSickLeaveRecyclerViewAdapter.ReceptionIssueStatusRecyclerViewHolder {
+            ReceptionSickLeaveRecyclerViewAdapter.ReceptionsickLeaveStatusRecyclerViewHolder {
         val view = mInflater?.inflate(R.layout.recyclerview_item_sickleave_inmate, parent, false)
-        return ReceptionIssueStatusRecyclerViewHolder(view)
+        return ReceptionsickLeaveStatusRecyclerViewHolder(view)
     }
 
     // binds the data to the TextView in each row
     override fun onBindViewHolder(holderStatus:
                                   ReceptionSickLeaveRecyclerViewAdapter
-                                  .ReceptionIssueStatusRecyclerViewHolder, pos: Int) {
-        holderStatus.title.text = issueList?.get(pos)?.sickLeaveTitle
-        holderStatus.name.text = issueList?.get(pos)?.sickLeaveReportedBy
-        val issueLocation = issueList?.get(pos)?.sickLeaveBlock + ", " + issueList?.get(pos)?.sickLeaveRoom
+                                  .ReceptionsickLeaveStatusRecyclerViewHolder, pos: Int) {
+        holderStatus.title.text = sickLeaveList?.get(pos)?.sickLeaveTitle
+        holderStatus.name.text = sickLeaveList?.get(pos)?.sickLeaveReportedBy
+        val issueLocation = sickLeaveList?.get(pos)?.sickLeaveBlock + ", " + sickLeaveList?.get(pos)?.sickLeaveRoom
         holderStatus.blockAndRoom.text = issueLocation
-        holderStatus.date.text = issueList?.get(pos)?.sickLeaveDate
-        holderStatus.issueStatus.text = issueList?.get(pos)?.sickLeaveStatus
-        if (issueList?.get(pos)?.sickLeaveStatus == "approved") {
-            context?.resources?.getColor(R.color.green)?.let { holderStatus.issueStatus
+        holderStatus.date.text = sickLeaveList?.get(pos)?.sickLeaveDate
+        holderStatus.sickLeaveStatus.text = sickLeaveList?.get(pos)?.sickLeaveStatus
+        if (sickLeaveList?.get(pos)?.sickLeaveStatus == "approved") {
+            context?.resources?.getColor(R.color.green)?.let { holderStatus.sickLeaveStatus
+                    .setTextColor(it) }
+        } else if (sickLeaveList?.get(pos)?.sickLeaveStatus == "rejected"){
+            context?.resources?.getColor(R.color.red)?.let { holderStatus.sickLeaveStatus
                     .setTextColor(it) }
         } else {
-            context?.resources?.getColor(R.color.red)?.let { holderStatus.issueStatus
+            context?.resources?.getColor(R.color.dark_grey)?.let { holderStatus.sickLeaveStatus
                     .setTextColor(it) }
         }
 
         holderStatus.item?.setOnClickListener {
             val intent = Intent(context, ReceptionSickLeaveDetailsActivity::class.java)
-            intent.putExtra(SELECTED_SICK_LEAVE, issueList?.get(pos))
+            intent.putExtra(SELECTED_SICK_LEAVE, sickLeaveList?.get(pos))
             intent.putExtra(SELECTED_POSITION, pos)
             context!!.startActivity(intent)
         }
@@ -61,23 +64,23 @@ internal constructor(var context: Context?,
 
     // total number of rows
     override fun getItemCount(): Int {
-        return issueList?.size!!
+        return sickLeaveList?.size!!
     }
 
     // data is passed into the constructor
     init {
         mInflater = LayoutInflater.from(context)
-        this.issueList = issueList
+        this.sickLeaveList = sickLeaveList
     }
 
-    inner class ReceptionIssueStatusRecyclerViewHolder(itemView: View?) :
+    inner class ReceptionsickLeaveStatusRecyclerViewHolder(itemView: View?) :
             RecyclerView.ViewHolder(itemView!!) {
         var item: CardView?
         var title: TextView
         var name: TextView
         var date: TextView
         var blockAndRoom: TextView
-        var issueStatus: TextView
+        var sickLeaveStatus: TextView
         var context: Context?
 
         init {
@@ -87,7 +90,7 @@ internal constructor(var context: Context?,
             name = itemView.findViewById(R.id.tvName)
             date = itemView.findViewById(R.id.tvDate)
             blockAndRoom = itemView.findViewById(R.id.tvBlockAndRoom)
-            issueStatus = itemView.findViewById(R.id.tvStatus)
+            sickLeaveStatus = itemView.findViewById(R.id.tvStatus)
         }
     }
 }

@@ -124,4 +124,5 @@
     <string name="description">Description</string>
     <string name="sick_leave_reason">Sick leave reason</string>
     <string name="write_reason_here">Write reason here</string>
+    <string name="sick_leave_description">Sick leave description:</string>
 </resources>
