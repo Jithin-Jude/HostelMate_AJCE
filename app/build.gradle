@@ -58,6 +58,12 @@ dependencies {
 
     //PDF Viewer
     implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
+
+    // Internet time
+    implementation 'commons-net:commons-net:3.3'
+
+    // Star rating
+    implementation 'com.github.whinc:ratingbar:1.1.1'
 }
 
 apply plugin: 'com.google.gms.google-services'
