@@ -2,18 +2,20 @@ package com.ajce.hostelmate.fragments
 
 import android.os.AsyncTask
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.ajce.hostelmate.R
+import com.ajce.hostelmate.Utils.Companion.getMonthInThreeCapLetter
+import com.ajce.hostelmate.servicefeedback.Feedback
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.content_issue_status.*
 import kotlinx.android.synthetic.main.fragment_feedback.*
 import org.apache.commons.net.ntp.NTPUDPClient
 import org.apache.commons.net.ntp.TimeInfo
-import java.lang.Exception
 import java.net.InetAddress
 import java.text.SimpleDateFormat
 import java.util.*
@@ -23,7 +25,13 @@ import java.util.*
  */
 class FeedbackFragment : Fragment() {
 
-    var currentTime: String? = null
+    var databaseReference: DatabaseReference? = null
+
+    val USER_EMAIL: String = "user_email"
+    var personEmail: String? = null
+
+    var currentYY: String? = null
+    var currentMM: String? = null
 
     var foodRating: Int? = 0
     var foodReview: String? = ""
@@ -37,6 +45,8 @@ class FeedbackFragment : Fragment() {
 
         activity?.title = getString(R.string.request_feedback)
 
+        personEmail = arguments?.getString(USER_EMAIL)
+
         ratingBarFood.setOnRatingChangeListener { ratingBar, preCount, currentRating ->
             foodRating = currentRating
         }
@@ -48,15 +58,33 @@ class FeedbackFragment : Fragment() {
             foodReview = etFood.text.toString()
             cleaningReview = etCleaning.text.toString()
 
-            Toast.makeText(context, "rating: $foodRating\n\n$foodReview", Toast.LENGTH_LONG).show()
+            val yearMonthKey = "2020_"+getMonthInThreeCapLetter(currentMM?.toInt()!!)
+            databaseReference = FirebaseDatabase.getInstance().getReference("feedback/$yearMonthKey")
+
+            submitFeedback()
         }
 
         GetInternetTime().execute()
     }
 
+    fun submitFeedback() {
+
+        if (foodRating == 0 || cleaningRating == 0 || foodReview == "" || cleaningReview == "") {
+            Toast.makeText(context, "Form fields cannot be empty", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        val monthlyKey = personEmail?.replace(".", "_")
+
+        val feedback = Feedback(personEmail, foodRating, foodReview, cleaningRating, cleaningReview)
+        databaseReference?.child(monthlyKey!!)?.setValue(feedback)
+        Toast.makeText(context, "Feedback submitted", Toast.LENGTH_LONG).show()
+    }
+
     inner class GetInternetTime : AsyncTask<String?, Void?, String?>() {
         override fun onPreExecute() {
             activity?.pbLoadingInmatesDashboard?.visibility = View.VISIBLE
+            btnSubmitFeedback.isEnabled = false
         }
 
         override fun doInBackground(vararg pdfUrl: String?): String? {
@@ -68,14 +96,15 @@ class FeedbackFragment : Fragment() {
             val returnTime: Long = timeInfo.message.transmitTimeStamp.time
             val time = Date(returnTime)
 
-            val s = SimpleDateFormat("yyyyMM", Locale.US)
-            currentTime = s.format(time)
-            return currentTime
+            currentYY = SimpleDateFormat("yyyy", Locale.US).format(time)
+            currentMM = SimpleDateFormat("MM", Locale.US).format(time)
+            return currentMM
         }
 
         override fun onPostExecute(currentTime: String?) {
-            Toast.makeText(activity?.applicationContext, "time: $currentTime", Toast.LENGTH_LONG).show()
+            Toast.makeText(activity?.applicationContext, "currentMonth: $currentMM", Toast.LENGTH_LONG).show()
             activity?.pbLoadingInmatesDashboard?.visibility = View.GONE
+            btnSubmitFeedback.isEnabled = true
         }
     }
 }

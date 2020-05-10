@@ -12,30 +12,35 @@ import com.google.firebase.database.IgnoreExtraProperties
 @IgnoreExtraProperties
 @Keep
 class Feedback() : Parcelable {
-    var feedbackId: String? = null
-    var feedbackRating: Int? = null
-    var feedbackDescription: String? = null
     var feedbackFrom: String? = null
+    var foodRating: Int? = null
+    var foodReview: String? = null
+    var cleaningRating: Int? = null
+    var cleaningReview: String? = null
 
     constructor(parcel: Parcel) : this() {
-        feedbackId = parcel.readString()
-        feedbackDescription = parcel.readString()
         feedbackFrom = parcel.readString()
+        foodRating = parcel.readInt()
+        foodReview = parcel.readString()
+        cleaningRating = parcel.readInt()
+        cleaningReview = parcel.readString()
     }
 
-    constructor(feedbackId: String?, feedbackRating: Int?, feedbackDescription: String?,
-                feedbackFrom: String?) : this() {
-        this.feedbackId = feedbackId
-        this.feedbackRating = feedbackRating
-        this.feedbackDescription = feedbackDescription
+    constructor(feedbackFrom: String?, foodRating: Int?, foodReview: String?,
+                cleaningRating: Int?, cleaningReview: String?) : this() {
         this.feedbackFrom = feedbackFrom
+        this.foodRating = foodRating
+        this.foodReview = foodReview
+        this.cleaningRating = cleaningRating
+        this.cleaningReview = cleaningReview
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(feedbackId)
-        parcel.writeInt(feedbackRating!!)
-        parcel.writeString(feedbackDescription)
         parcel.writeString(feedbackFrom)
+        parcel.writeInt(foodRating!!)
+        parcel.writeString(foodReview)
+        parcel.writeInt(cleaningRating!!)
+        parcel.writeString(cleaningReview)
     }
 
     override fun describeContents(): Int {
