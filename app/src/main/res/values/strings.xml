@@ -132,4 +132,7 @@
     <string name="if_rejected_without_comments_meet_in_person_instruction_will_be_pass_to_inmate">If rejected without comments, Meet in person instruction will be pass to inmate</string>
     <string name="report_in_person">Report in person at reception.</string>
     <string name="comments">Comments:</string>
+    <string name="publish_notice">Publish notice</string>
+    <string name="notice_title">Notice title</string>
+    <string name="notice_details">Notice details</string>
 </resources>

@@ -28,10 +28,13 @@
         <activity android:name="com.ajce.hostelmate.activities.ReceptionDashboardActivity" />
         <activity android:name="com.ajce.hostelmate.reportissue.reception.ReceptionIssuesDetailsActivity" />
 
-
         <activity android:name="com.ajce.hostelmate.sickleave.inmates.InmatesRequestSickLeaveActivity" />
         <activity android:name="com.ajce.hostelmate.sickleave.inmates.InmatesSickLeavesDetailsActivity" />
         <activity android:name="com.ajce.hostelmate.sickleave.reception.ReceptionSickLeaveDetailsActivity" />
+
+        <activity android:name="com.ajce.hostelmate.noticeboard.reception.ReceptionPublishNoticeActivity" />
+        <activity android:name="com.ajce.hostelmate.noticeboard.reception.ReceptionNoticeBoardDetailsActivity" />
+
         <activity
             android:name="com.ajce.hostelmate.activities.SplashScreenActivity"
             android:theme="@style/SplashTheme">
