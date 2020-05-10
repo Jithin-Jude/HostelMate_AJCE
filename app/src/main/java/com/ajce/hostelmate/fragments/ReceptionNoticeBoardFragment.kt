@@ -15,6 +15,7 @@ import com.ajce.hostelmate.noticeboard.NoticeBoardViewModel
 import com.ajce.hostelmate.noticeboard.reception.ReceptionNoticeBoardRecyclerViewAdapter
 import com.ajce.hostelmate.noticeboard.reception.ReceptionPublishNoticeActivity
 import com.google.firebase.database.DataSnapshot
+import kotlinx.android.synthetic.main.activity_reception_dashboard.*
 import kotlinx.android.synthetic.main.content_issue_status.*
 import kotlinx.android.synthetic.main.fragment_notice_board_reception.*
 
@@ -33,7 +34,7 @@ class ReceptionNoticeBoardFragment : Fragment() {
 
         activity?.title = getString(R.string.notice_board)
 
-        activity?.loadingIssuesForInmates?.visibility = View.VISIBLE
+        activity!!.pbLoading.visibility = View.VISIBLE
         fab.setOnClickListener {
             val intent = Intent(context, ReceptionPublishNoticeActivity::class.java)
             startActivity(intent)
@@ -57,7 +58,7 @@ class ReceptionNoticeBoardFragment : Fragment() {
             noticeList?.reverse()
             receptionNoticeBoardRecyclerViewAdapter = ReceptionNoticeBoardRecyclerViewAdapter(context, noticeList)
             rvNotice.adapter = receptionNoticeBoardRecyclerViewAdapter
-            activity?.loadingIssuesForInmates?.visibility = View.GONE
+            activity!!.pbLoading.visibility = View.GONE
         })
     }
 }
