@@ -16,6 +16,7 @@ import android.widget.RemoteViews
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.ajce.hostelmate.R
+import com.ajce.hostelmate.Utils.Companion.getTimeStamp
 import com.ajce.hostelmate.WidgetForInmates
 import com.ajce.hostelmate.activities.InmatesLoginActivity
 import com.ajce.hostelmate.reportissue.Issue
@@ -143,12 +144,6 @@ class InmatesReportAnIssueActivity : AppCompatActivity() {
         }else{
             //showSnackBar("Please select an Image")
         }
-    }
-
-    fun getTimeStamp(): String{
-        val s = SimpleDateFormat("ddMMyyyyhhmmss", Locale.US)
-        val timeStamp = s.format(Date())
-        return timeStamp
     }
 
     fun updateWidget(widgetText: String?) {

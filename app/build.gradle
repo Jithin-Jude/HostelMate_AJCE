@@ -55,6 +55,9 @@ dependencies {
     implementation "android.arch.lifecycle:extensions:$lifecycle_version"
     // Annotation processor
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
+
+    //PDF Viewer
+    implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
 }
 
 apply plugin: 'com.google.gms.google-services'

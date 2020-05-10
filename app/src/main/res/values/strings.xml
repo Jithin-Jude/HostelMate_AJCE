@@ -88,7 +88,7 @@
     <string name="issue_description">Issue description :</string>
     <string name="create_issue">Create Issue</string>
     <string name="_812">812</string>
-    <string name="lorem_ipsum_dolor_sit_amet_consectetur_adipiscing_elit_sed_do_eiusmod_tempor_incididunt_ut_labore_et_dolore_magna_aliqua">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
     <string name="status">Status</string>
     <string name="fixed">Fixed</string>
     <string name="b">B</string>
@@ -135,4 +135,5 @@
     <string name="publish_notice">Publish notice</string>
     <string name="notice_title">Notice title</string>
     <string name="notice_details">Notice details</string>
+    <string name="date">Date</string>
 </resources>
