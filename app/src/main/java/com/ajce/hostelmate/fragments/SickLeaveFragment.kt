@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProviders
@@ -38,7 +37,7 @@ class SickLeaveFragment : Fragment() {
 
         val personEmail = arguments?.getString(USER_EMAIL)
 
-        activity?.loadingIssuesForInmates?.visibility = View.VISIBLE
+        activity?.pbLoadingInmatesDashboard?.visibility = View.VISIBLE
         fab.setOnClickListener {
             val intent = Intent(context, InmatesRequestSickLeaveActivity::class.java)
             intent.putExtra(USER_EMAIL, personEmail)
@@ -67,7 +66,7 @@ class SickLeaveFragment : Fragment() {
             sickLeaveList?.reverse()
             inmatesSickLeaveRecyclerViewAdapter = InmatesSickLeaveRecyclerViewAdapter(context, sickLeaveList)
             rvSickLeave.adapter = inmatesSickLeaveRecyclerViewAdapter
-            activity?.loadingIssuesForInmates?.visibility = View.GONE
+            activity?.pbLoadingInmatesDashboard?.visibility = View.GONE
         })
     }
 }

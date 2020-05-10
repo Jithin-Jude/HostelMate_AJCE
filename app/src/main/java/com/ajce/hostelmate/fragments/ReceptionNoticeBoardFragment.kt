@@ -25,8 +25,8 @@ import kotlinx.android.synthetic.main.fragment_notice_board_reception.*
 class ReceptionNoticeBoardFragment : Fragment() {
 
     var noticeList: MutableList<NoticeBoard?>? = ArrayList()
-
     lateinit var receptionNoticeBoardRecyclerViewAdapter: ReceptionNoticeBoardRecyclerViewAdapter
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
             inflater.inflate(R.layout.fragment_notice_board_reception, container, false)
     override fun onActivityCreated(savedInstanceState: Bundle?) {

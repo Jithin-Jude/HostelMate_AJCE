@@ -38,7 +38,7 @@ class IssueFragment : Fragment() {
 
         val personEmail = arguments?.getString(USER_EMAIL)
 
-        activity?.loadingIssuesForInmates?.visibility = View.VISIBLE
+        activity?.pbLoadingInmatesDashboard?.visibility = View.VISIBLE
         fab.setOnClickListener {
             val intent = Intent(context, InmatesReportAnIssueActivity::class.java)
             intent.putExtra(USER_EMAIL, personEmail)
@@ -67,7 +67,7 @@ class IssueFragment : Fragment() {
             issueList?.reverse()
             adapterInmatesIssueStatus = InmatesIssueStatusRecyclerViewAdapter(context, issueList)
             rvIssueStatus.adapter = adapterInmatesIssueStatus
-            activity?.loadingIssuesForInmates?.visibility = View.GONE
+            activity?.pbLoadingInmatesDashboard?.visibility = View.GONE
         })
     }
 
