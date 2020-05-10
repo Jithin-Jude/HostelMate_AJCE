@@ -10,7 +10,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="wrap_content"
         android:layout_margin="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -25,21 +25,22 @@
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Monthly food feedback"
+                android:text="@string/monthly_food_feedback"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.whinc.widget.ratingbar.RatingBar
-                android:id="@+id/ratingBar"
+                android:id="@+id/ratingBarFood"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toTopOf="@+id/editText"
+                android:layout_marginTop="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/etFood"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView"
                 app:rb_click_rating="true"
-                app:rb_count="3"
+                app:rb_count="0"
                 app:rb_empty="@drawable/empty"
                 app:rb_fill="@drawable/fill"
                 app:rb_max_count="5"
@@ -47,15 +48,16 @@
                 app:rb_touch_rating="true" />
 
             <EditText
-                android:id="@+id/editText"
+                android:id="@+id/etFood"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="100dp"
                 android:background="@drawable/edittext_bg"
                 android:ems="10"
                 android:gravity="top|start"
-                android:hint="Comments on food"
+                android:hint="@string/comments_on_food"
                 android:inputType="textMultiLine"
                 android:padding="8dp"
+                android:layout_marginTop="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -63,9 +65,9 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btnSubmitFeedback"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView2">
 
@@ -79,7 +81,7 @@
                 android:id="@+id/tvCleaningFeedbackTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Monthly cleaning feedback"
+                android:text="@string/monthly_cleaning_feedback"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -88,12 +90,13 @@
                 android:id="@+id/ratingBarCleaning"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 app:layout_constraintBottom_toTopOf="@+id/etCleaning"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvCleaningFeedbackTitle"
                 app:rb_click_rating="true"
-                app:rb_count="3"
+                app:rb_count="0"
                 app:rb_empty="@drawable/empty"
                 app:rb_fill="@drawable/fill"
                 app:rb_max_count="5"
@@ -103,15 +106,27 @@
             <EditText
                 android:id="@+id/etCleaning"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="100dp"
                 android:background="@drawable/edittext_bg"
                 android:ems="10"
                 android:gravity="top|start"
-                android:hint="Comments on hostel cleaning facilities"
+                android:hint="@string/comments_on_hostel_cleaning_facilities"
                 android:inputType="textMultiLine"
                 android:padding="8dp"
+                android:layout_marginTop="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/btnSubmitFeedback"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/submit_feedback"
+        android:textAllCaps="false"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

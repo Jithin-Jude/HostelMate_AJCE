@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.ajce.hostelmate.R
 import kotlinx.android.synthetic.main.content_issue_status.*
+import kotlinx.android.synthetic.main.fragment_feedback.*
 import org.apache.commons.net.ntp.NTPUDPClient
 import org.apache.commons.net.ntp.TimeInfo
 import java.lang.Exception
@@ -24,12 +25,31 @@ class FeedbackFragment : Fragment() {
 
     var currentTime: String? = null
 
+    var foodRating: Int? = 0
+    var foodReview: String? = ""
+    var cleaningRating: Int? = 0
+    var cleaningReview: String? = ""
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
             inflater.inflate(R.layout.fragment_feedback, container, false)
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
         activity?.title = getString(R.string.request_feedback)
+
+        ratingBarFood.setOnRatingChangeListener { ratingBar, preCount, currentRating ->
+            foodRating = currentRating
+        }
+        ratingBarCleaning.setOnRatingChangeListener { ratingBar, preCount, currentRating ->
+            cleaningRating = currentRating
+        }
+
+        btnSubmitFeedback.setOnClickListener {
+            foodReview = etFood.text.toString()
+            cleaningReview = etCleaning.text.toString()
+
+            Toast.makeText(context, "rating: $foodRating\n\n$foodReview", Toast.LENGTH_LONG).show()
+        }
 
         GetInternetTime().execute()
     }

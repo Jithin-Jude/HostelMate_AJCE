@@ -136,4 +136,9 @@
     <string name="notice_title">Notice title</string>
     <string name="notice_details">Notice details</string>
     <string name="date">Date</string>
+    <string name="comments_on_hostel_cleaning_facilities">Comments on hostel cleaning facilities</string>
+    <string name="monthly_cleaning_feedback">Monthly cleaning feedback</string>
+    <string name="comments_on_food">Comments on food</string>
+    <string name="monthly_food_feedback">Monthly food feedback</string>
+    <string name="submit_feedback">Submit Feedback</string>
 </resources>
