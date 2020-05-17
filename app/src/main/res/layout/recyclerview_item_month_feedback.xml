@@ -24,5 +24,25 @@
             android:textSize="21sp"
             android:textStyle="bold"
             android:text="YYYY - MTH" />
+
+        <TextView
+            android:id="@+id/tvFeedbackFood"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="21sp"
+            android:textStyle="bold"
+            android:text="12/50" />
+
+        <TextView
+            android:id="@+id/tvFeedbackCleaning"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="21sp"
+            android:textStyle="bold"
+            android:text="42/50" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

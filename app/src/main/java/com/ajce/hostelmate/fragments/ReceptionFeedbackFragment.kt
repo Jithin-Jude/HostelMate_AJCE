@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProviders
@@ -25,6 +26,7 @@ import kotlinx.android.synthetic.main.fragment_feedback_reception.*
 class ReceptionFeedbackFragment : Fragment() {
     
     var monthlyFeedbackList: MutableList<String?>? = ArrayList()
+    var feedbackList: MutableList<Feedback?>? = ArrayList()
     lateinit var receptionMonthlyFeedbacksRecyclerViewAdapter: ReceptionMonthlyFeedbacksRecyclerViewAdapter
 
     lateinit var databaseIssue: DatabaseReference
@@ -64,8 +66,11 @@ class ReceptionFeedbackFragment : Fragment() {
 
         liveData.observe(this, androidx.lifecycle.Observer { dataSnapshot ->
             monthlyFeedbackList?.clear()
-            for (sickLeaveSnapshot in dataSnapshot?.children!!) {
-                monthlyFeedbackList?.add(sickLeaveSnapshot.key)
+            for (monthlyFeedbackSnapshot in dataSnapshot?.children!!) {
+                monthlyFeedbackList?.add(monthlyFeedbackSnapshot.key)
+/*                for (feedback in monthlyFeedbackList!!){
+                    feedbackList?.add(monthlyFeedbackSnapshot.child(monthlyFeedbackSnapshot.key!!).value as Feedback?)
+                }*/
             }
 
             rvMonthlyFeedback.layoutManager = LinearLayoutManager(context)
@@ -73,6 +78,8 @@ class ReceptionFeedbackFragment : Fragment() {
             receptionMonthlyFeedbacksRecyclerViewAdapter = ReceptionMonthlyFeedbacksRecyclerViewAdapter(context, monthlyFeedbackList)
             rvMonthlyFeedback.adapter = receptionMonthlyFeedbacksRecyclerViewAdapter
             activity!!.pbLoading.visibility = View.GONE
+
+//            Toast.makeText(context, "Feedback: " + feedbackList?.get(0)?.foodReview, Toast.LENGTH_LONG).show()
         })
     }
 }

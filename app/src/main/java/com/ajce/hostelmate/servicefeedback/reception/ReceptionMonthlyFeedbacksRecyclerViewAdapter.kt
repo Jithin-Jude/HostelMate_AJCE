@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.ajce.hostelmate.R
+import com.ajce.hostelmate.Utils.Companion.getMonthInFull
 import com.ajce.hostelmate.servicefeedback.Feedback
 import com.ajce.hostelmate.sickleave.SickLeave
 
@@ -38,7 +39,12 @@ internal constructor(var context: Context?,
     override fun onBindViewHolder(holderStatus:
                                   ReceptionMonthlyFeedbacksRecyclerViewAdapter
                                   .ReceptionsickLeaveStatusRecyclerViewHolder, pos: Int) {
-        holderStatus.title.text = monthlyFeedbackList?.get(pos)
+        val yyyy = monthlyFeedbackList?.get(pos)?.substring(0, 4);
+        val MMMM = monthlyFeedbackList?.get(pos)?.substring(7, 10);
+
+        val monthName = getMonthInFull(MMMM!!)
+
+        holderStatus.title.text = "$yyyy $monthName"
 
         holderStatus.item?.setOnClickListener {
 /*            val intent = Intent(context, ReceptionSickLeaveDetailsActivity::class.java)

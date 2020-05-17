@@ -35,5 +35,25 @@ class Utils : Application() {
                 }
             }
         }
+
+        fun getMonthInFull(month: String): String{
+            when (month){
+                "JAN" -> { return "January"}
+                "FEB" -> { return "February"}
+                "MAR" -> { return "March"}
+                "APR" -> { return "April"}
+                "MAY" -> { return "May"}
+                "JUN" -> { return "June"}
+                "JUL" -> { return "July"}
+                "AUG" -> { return "August"}
+                "SEP" -> { return "September"}
+                "OCT" -> { return "October"}
+                "NOV" -> { return "November"}
+                "DEC" -> { return "December"}
+                else -> {
+                    return "ERROR"
+                }
+            }
+        }
     }
 }
