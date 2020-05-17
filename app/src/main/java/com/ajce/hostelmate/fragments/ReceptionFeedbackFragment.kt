@@ -2,6 +2,7 @@ package com.ajce.hostelmate.fragments
 
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +15,7 @@ import com.ajce.hostelmate.servicefeedback.Feedback
 import com.ajce.hostelmate.servicefeedback.FeedbackViewModel
 import com.ajce.hostelmate.servicefeedback.reception.ReceptionMonthlyFeedbacksRecyclerViewAdapter
 import com.ajce.hostelmate.sickleave.SickLeave
-import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_reception_dashboard.*
 import kotlinx.android.synthetic.main.fragment_feedback_reception.*
 
@@ -25,6 +26,8 @@ class ReceptionFeedbackFragment : Fragment() {
     
     var monthlyFeedbackList: MutableList<String?>? = ArrayList()
     lateinit var receptionMonthlyFeedbacksRecyclerViewAdapter: ReceptionMonthlyFeedbacksRecyclerViewAdapter
+
+    lateinit var databaseIssue: DatabaseReference
     
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
             inflater.inflate(R.layout.fragment_feedback_reception, container, false)
@@ -34,7 +37,28 @@ class ReceptionFeedbackFragment : Fragment() {
 
         activity!!.pbLoading.visibility = View.VISIBLE
 
-        val viewModel: FeedbackViewModel by lazy { ViewModelProviders.of(this).get(FeedbackViewModel::class.java) }
+        databaseIssue = FirebaseDatabase.getInstance().getReference("feedback")
+        val listener: ValueEventListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                monthlyFeedbackList?.clear()
+                for (issueSnapshot in dataSnapshot.children) {
+//                    val issue = issueSnapshot.getValue(Issue::class.java)
+                    monthlyFeedbackList?.add(issueSnapshot.key)
+                }
+
+                rvMonthlyFeedback.layoutManager = LinearLayoutManager(context)
+                monthlyFeedbackList?.reverse()
+                receptionMonthlyFeedbacksRecyclerViewAdapter = ReceptionMonthlyFeedbacksRecyclerViewAdapter(context, monthlyFeedbackList)
+                rvMonthlyFeedback.adapter = receptionMonthlyFeedbacksRecyclerViewAdapter
+                activity!!.pbLoading.visibility = View.GONE
+            }
+            override fun onCancelled(databaseError: DatabaseError) {
+                Log.d("ERROR","ERROR: " + databaseError)
+            }
+        }
+        databaseIssue.addValueEventListener(listener)
+
+/*        val viewModel: FeedbackViewModel by lazy { ViewModelProviders.of(this).get(FeedbackViewModel::class.java) }
 
         val liveData: LiveData<String?> = viewModel.getDataSnapshotLiveData()
 
@@ -44,16 +68,16 @@ class ReceptionFeedbackFragment : Fragment() {
                 val sickLeave = sickLeaveSnapshot.toString()
                 monthlyFeedbackList?.add(sickLeave)
             }
-/*            if (!sharedPreferences.getBoolean("NOTIFICATIONS_ON", false)) {
+*//*            if (!sharedPreferences.getBoolean("NOTIFICATIONS_ON", false)) {
                 monthlyFeedbackList?.size?.let { editor.putInt("NUMBER_OF_ISSUES", it) }
                 editor.apply()
-            }*/
+            }*//*
 
             rvMonthlyFeedback.layoutManager = LinearLayoutManager(context)
             monthlyFeedbackList?.reverse()
             receptionMonthlyFeedbacksRecyclerViewAdapter = ReceptionMonthlyFeedbacksRecyclerViewAdapter(context, monthlyFeedbackList)
             rvMonthlyFeedback.adapter = receptionMonthlyFeedbacksRecyclerViewAdapter
             activity!!.pbLoading.visibility = View.GONE
-        })
+        })*/
     }
 }
