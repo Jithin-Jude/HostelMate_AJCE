@@ -8,6 +8,7 @@ import android.widget.RemoteViews
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.ajce.hostelmate.R
+import com.ajce.hostelmate.nightstudy.NightStudy
 import com.ajce.hostelmate.reportissue.Issue
 import com.ajce.hostelmate.sickleave.SickLeave
 import com.google.android.gms.tasks.Task
@@ -83,7 +84,7 @@ class InmatesRequestNightStudyActivity : AppCompatActivity() {
             return
         }
 
-        val issue = SickLeave(id, title, block, room, description, reportedBy, date, status, nightStudyReasonForRejection)
+        val issue = NightStudy(id, title, block, room, description, reportedBy, date, status, nightStudyReasonForRejection)
         databaseReference?.child(id!!)?.setValue(issue)
         Toast.makeText(this, "Night Study requested", Toast.LENGTH_LONG).show()
         finish()
