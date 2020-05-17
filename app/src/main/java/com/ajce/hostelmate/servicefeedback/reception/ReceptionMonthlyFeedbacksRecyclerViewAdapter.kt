@@ -69,12 +69,16 @@ internal constructor(var context: Context?,
             RecyclerView.ViewHolder(itemView!!) {
         var item: CardView?
         var title: TextView
+        var food: TextView
+        var cleaning: TextView
         var context: Context?
 
         init {
             context = itemView?.context
             item = itemView?.findViewById(R.id.itemCardView)
             title = itemView?.findViewById(R.id.tvFeedbackMonth)!!
+            food = itemView.findViewById(R.id.tvFeedbackFood)!!
+            cleaning = itemView.findViewById(R.id.tvFeedbackCleaning)!!
         }
     }
 }
