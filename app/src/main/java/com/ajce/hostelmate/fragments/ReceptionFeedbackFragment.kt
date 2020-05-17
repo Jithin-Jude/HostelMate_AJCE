@@ -37,7 +37,7 @@ class ReceptionFeedbackFragment : Fragment() {
 
         activity!!.pbLoading.visibility = View.VISIBLE
 
-        databaseIssue = FirebaseDatabase.getInstance().getReference("feedback")
+/*        databaseIssue = FirebaseDatabase.getInstance().getReference("feedback")
         val listener: ValueEventListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 monthlyFeedbackList?.clear()
@@ -56,28 +56,23 @@ class ReceptionFeedbackFragment : Fragment() {
                 Log.d("ERROR","ERROR: " + databaseError)
             }
         }
-        databaseIssue.addValueEventListener(listener)
+        databaseIssue.addValueEventListener(listener)*/
 
-/*        val viewModel: FeedbackViewModel by lazy { ViewModelProviders.of(this).get(FeedbackViewModel::class.java) }
+        val viewModel: FeedbackViewModel by lazy { ViewModelProviders.of(this).get(FeedbackViewModel::class.java) }
 
-        val liveData: LiveData<String?> = viewModel.getDataSnapshotLiveData()
+        val liveData: LiveData<DataSnapshot?> = viewModel.getDataSnapshotLiveData()
 
         liveData.observe(this, androidx.lifecycle.Observer { dataSnapshot ->
             monthlyFeedbackList?.clear()
-            for (sickLeaveSnapshot in dataSnapshot!!) {
-                val sickLeave = sickLeaveSnapshot.toString()
-                monthlyFeedbackList?.add(sickLeave)
+            for (sickLeaveSnapshot in dataSnapshot?.children!!) {
+                monthlyFeedbackList?.add(sickLeaveSnapshot.key)
             }
-*//*            if (!sharedPreferences.getBoolean("NOTIFICATIONS_ON", false)) {
-                monthlyFeedbackList?.size?.let { editor.putInt("NUMBER_OF_ISSUES", it) }
-                editor.apply()
-            }*//*
 
             rvMonthlyFeedback.layoutManager = LinearLayoutManager(context)
             monthlyFeedbackList?.reverse()
             receptionMonthlyFeedbacksRecyclerViewAdapter = ReceptionMonthlyFeedbacksRecyclerViewAdapter(context, monthlyFeedbackList)
             rvMonthlyFeedback.adapter = receptionMonthlyFeedbacksRecyclerViewAdapter
             activity!!.pbLoading.visibility = View.GONE
-        })*/
+        })
     }
 }
