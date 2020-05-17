@@ -141,4 +141,6 @@
     <string name="comments_on_food">Comments on food</string>
     <string name="monthly_food_feedback">Monthly food feedback</string>
     <string name="submit_feedback">Submit Feedback</string>
+    <string name="request_nightstudy">Request Night Study</string>
+    <string name="night_study_reason">Night study reason</string>
 </resources>

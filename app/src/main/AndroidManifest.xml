@@ -35,6 +35,7 @@
         <activity android:name="com.ajce.hostelmate.noticeboard.reception.ReceptionPublishNoticeActivity" />
         <activity android:name="com.ajce.hostelmate.noticeboard.reception.ReceptionNoticeBoardDetailsActivity" />
         <activity android:name="com.ajce.hostelmate.noticeboard.inmates.InmatesNoticeBoardDetailsActivity" />
+        <activity android:name="com.ajce.hostelmate.nightstudy.inmates.InmatesRequestNightStudyActivity" />
 
         <activity
             android:name="com.ajce.hostelmate.activities.SplashScreenActivity"
