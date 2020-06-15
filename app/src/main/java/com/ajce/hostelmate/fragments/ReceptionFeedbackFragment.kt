@@ -70,7 +70,7 @@ class ReceptionFeedbackFragment : Fragment() {
         liveData.observe(this, androidx.lifecycle.Observer { dataSnapshot ->
             monthlyFeedbackList?.clear()
             feedbackList.clear()
-            var i = 0
+//            var i = 0
             for (monthlyFeedbackSnapshot in dataSnapshot?.children!!) {
                 monthlyFeedbackList?.add(monthlyFeedbackSnapshot.key)
                 monthlyFeedbacks.clear()
@@ -78,9 +78,9 @@ class ReceptionFeedbackFragment : Fragment() {
                     monthlyFeedbacks.add(feedback.getValue(Feedback::class.java))
                 }
                 Log.d("DATA", "monthlyFeedbacks size: " + monthlyFeedbacks.size)
-                feedbackList.add(i, monthlyFeedbacks)
+                feedbackList.addAll(listOf(monthlyFeedbacks))
                 Toast.makeText(context, "Feedback: " + feedbackList[0][0]?.foodRating, Toast.LENGTH_LONG).show()
-                i++
+//                i++
             }
 
             rvMonthlyFeedback.layoutManager = LinearLayoutManager(context)

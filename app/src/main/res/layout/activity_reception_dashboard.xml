@@ -26,7 +26,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/dashboardContainer"
-        app:menu="@menu/inmates_bottom_navigation" />
+        app:menu="@menu/reception_bottom_navigation" />
 
     <ProgressBar
         android:id="@+id/pbLoading"

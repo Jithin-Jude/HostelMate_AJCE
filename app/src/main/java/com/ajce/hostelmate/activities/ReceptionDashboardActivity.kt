@@ -56,12 +56,12 @@ class ReceptionDashboardActivity : AppCompatActivity() {
                             .commit()
                     return@OnNavigationItemSelectedListener true
                 }
-                R.id.bNavFeedback -> {
+/*                R.id.bNavFeedback -> {
                     val fragment = ReceptionFeedbackFragment()
                     supportFragmentManager.beginTransaction().replace(R.id.dashboardContainer, fragment, fragment.javaClass.getSimpleName())
                             .commit()
                     return@OnNavigationItemSelectedListener true
-                }
+                }*/
             }
             false
         }
