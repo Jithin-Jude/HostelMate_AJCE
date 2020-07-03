@@ -27,6 +27,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    lintOptions {
+        checkReleaseBuilds false
+        //If you want to continue even if errors found use following line
+        abortOnError false
+    }
 }
 
 dependencies {
@@ -65,8 +70,7 @@ dependencies {
     // Star rating
     implementation 'com.github.whinc:ratingbar:1.1.1'
 }
-
-apply plugin: 'com.google.gms.google-services'
 repositories {
     mavenCentral()
 }
+apply plugin: 'com.google.gms.google-services'

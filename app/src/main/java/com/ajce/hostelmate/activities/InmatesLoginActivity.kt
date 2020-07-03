@@ -96,7 +96,7 @@ class InmatesLoginActivity : AppCompatActivity() {
             } catch (e: ApiException) {
                 // Google Sign In failed, update UI appropriately
                 signInProgress.setVisibility(View.INVISIBLE)
-                Toast.makeText(this, R.string.google_sign_in_failed, Toast.LENGTH_LONG).show()
+                Toast.makeText(this, e.printStackTrace().toString(), Toast.LENGTH_LONG).show()
             }
         }
     }

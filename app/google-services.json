@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "819808533668-40isqtrdpv3rhnii34r0bvuqi4mdvvfs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ajce.hostelmate",
+            "certificate_hash": "6b4e2ef008c5a101e95cb6b31977ad465d486daf"
+          }
+        },
+        {
           "client_id": "819808533668-pfbvuorpusv034g2g83hhjues8gqj7ia.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
